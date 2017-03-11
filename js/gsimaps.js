@@ -60,7 +60,8 @@ CONFIG.TOPMESSAGE = null;
 };*/
 
 // 初期位置
-CONFIG.DEFAULT = { CENTER : [35.3622222, 138.7313889],ZOOM : 5};
+//CONFIG.DEFAULT = { CENTER : [35.3622222, 138.7313889],ZOOM : 5};
+CONFIG.DEFAULT = { CENTER : [34.592376, 135.505317],ZOOM : 15};
 
 // レイヤータイプリスト
 CONFIG.LAYERTYPELIST = {
@@ -85,7 +86,7 @@ CONFIG.COCOTILEVISIBLE = false;
 CONFIG.COCOTILEURL = ['https://cyberjapandata-t1.gsi.go.jp/xyz/cocotile/{z}/{x}/{y}.csv', 'https://cyberjapandata-t2.gsi.go.jp/xyz/cocotile/{z}/{x}/{y}.csv', 'https://cyberjapandata-t3.gsi.go.jp/xyz/cocotile/{z}/{x}/{y}.csv', 'http://insarmap.gsi.go.jp/xyz/cocotile/{z}/{x}/{y}.csv'];
 
 // アクセスカウンターを表示するかどうか
-CONFIG.USEACCESSCOUNTER = true;
+CONFIG.USEACCESSCOUNTER = false;
 
 // リストにレイヤーのタイプを表示するかどうか（デバッグ用）
 CONFIG.VISIBLELAYERTYPE  = false;
@@ -353,56 +354,13 @@ CONFIG.FUNCMENU = {
 	title : '機能',
 	children : [
 		{
-			title : '設定',
-			arrow : true,
-			childrenWidth:230,
-			children : [
-				{
-					id : CONFIG.PARAMETERNAMES.CENTERCROSS,
-					title : '中心十字線',
-					typeA : 'check',
-					defaultCheck : true
-				},
-				{
-					id : CONFIG.PARAMETERNAMES.LATLNGGRID,
-					title : '緯経度グリッド',
-					typeA : 'check',
-					defaultCheck : false
-				},
-				{
-					id : CONFIG.PARAMETERNAMES.UTMGRID,
-					title : 'UTMグリッド',
-					typeA : 'check',
-					defaultCheck : false
-				},
-				{
-					id : CONFIG.PARAMETERNAMES.JIHOKULINE,
-					title : '磁北線' + '<span class="mini_comment">（ズーム11以上）</span>',
-					typeA : 'check',
-					defaultCheck : false
-				},
-				{
-					id : CONFIG.PARAMETERNAMES.MINIMAP,
-					title : '広域図',
-					typeA : 'check',
-					defaultCheck : true
-				},
-				{
-					id : CONFIG.PARAMETERNAMES.CLICKMOVE,
-					title : 'クリックで移動',
-					typeA : 'check',
-					defaultCheck : false
-				}
-			]
-		},
-		{
-			title : 'ツール',
+			title : 'データ作成ツール',
 			arrow : true,
 			childrenWidth:150,
 			children : [
 				{
 					id : 'sakuzu',
-					title : '作図・ファイル',
+					title : 'データ作成',
 					arrow : true
 				},
 				{
@@ -481,6 +439,49 @@ CONFIG.FUNCMENU = {
 			arrow : true,
 			href : 'gsiglobe'//'http://maps.gsi.go.jp/globe/index_globe.html'
 */
+		},
+		{
+			title : '設定',
+			arrow : true,
+			childrenWidth:230,
+			children : [
+				{
+					id : CONFIG.PARAMETERNAMES.CENTERCROSS,
+					title : '中心十字線',
+					typeA : 'check',
+					defaultCheck : false
+				},
+				{
+					id : CONFIG.PARAMETERNAMES.LATLNGGRID,
+					title : '緯経度グリッド',
+					typeA : 'check',
+					defaultCheck : false
+				},
+				{
+					id : CONFIG.PARAMETERNAMES.UTMGRID,
+					title : 'UTMグリッド',
+					typeA : 'check',
+					defaultCheck : false
+				},
+				{
+					id : CONFIG.PARAMETERNAMES.JIHOKULINE,
+					title : '磁北線' + '<span class="mini_comment">（ズーム11以上）</span>',
+					typeA : 'check',
+					defaultCheck : false
+				},
+				{
+					id : CONFIG.PARAMETERNAMES.MINIMAP,
+					title : '広域図',
+					typeA : 'check',
+					defaultCheck : true
+				},
+				{
+					id : CONFIG.PARAMETERNAMES.CLICKMOVE,
+					title : 'クリックで移動',
+					typeA : 'check',
+					defaultCheck : false
+				}
+			]
 		}
 	]
 };
@@ -545,11 +546,11 @@ GSI.TEXT.MEASURE.DIALOG_OBJECT_CAPTION = '選択図形';
 
 // 作図関連
 GSI.TEXT.SAKUZU = {};
-GSI.TEXT.SAKUZU.SAKUZUTITLE = '新規作図情報';
+GSI.TEXT.SAKUZU.SAKUZUTITLE = '新規データ作成';
 GSI.TEXT.SAKUZU.LOAD_ERROR = 'ファイルが読み込めません。';
 GSI.TEXT.SAKUZU.LOAD_NOFILE = 'ファイルが選択されていません。';
 
-GSI.TEXT.SAKUZU.DIALOG_TITLE = '作図・ファイル';
+GSI.TEXT.SAKUZU.DIALOG_TITLE = 'データ作成';
 GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_LOAD = 'ファイルから読み込み';
 GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_SAVE = '選択している情報をまとめて保存';
 GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDMARKER = 'マーカー（アイコン）を追加';
@@ -6536,40 +6537,52 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		frame.append( btn );
 
 		// ポイント（マーカー）
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_markc.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDCIRCLEMARKER}).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.POINT_CIRCLE) );
 		frame.append( btn );
+		*/
 
 		// 線
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_line.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDLINE }).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.LINESTRING) );
 		frame.append( btn );
+		 */
 
 		// ポリゴン
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_polygon.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDPOLY}).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.POLYGON) );
 		frame.append( btn );
+		*/
 
 		// 円
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_circle.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDCIRCLE }).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.CIRCLE) );
 		frame.append( btn );
+		*/
 
 		// ポイント(テキスト)
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_text.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDDIVMARKER}).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.POINT_TEXT) );
 		frame.append( btn );
+		*/
 
 		// フリーハンド
+		/*
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
 			$('<img>').attr({'src': 'image/sakuzu/icon_freehand.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDFREEHAND}).css( {'width' : '24px', 'height' : '24px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.FREEHAND) );
 		frame.append( btn );
+		*/
 
 		frame.append( $('<div>').css( { clear:'both'} ) );
 
@@ -7100,7 +7113,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		this._pointIconSizeSelect.append( $( '<option>' ).html("1.5").val("1.5" ) );
 		this._pointIconSizeSelect.append( $( '<option>' ).html("2.0").val("2.0" ) );
 
-		this._pointIconSizeSelect[0].selectedIndex = 1;
+		this._pointIconSizeSelect[0].selectedIndex = 3;
 		this._pointIconSizeSelect.on( 'change',  L.bind( this._onPointIconSizeChange, this ) );
 
 		tr.append( $( '<td>' ).append( this._pointIconSizeSelect ) );
@@ -7459,7 +7472,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		tr.append( $( '<td>' ).css( { 'white-space':'nowrap'} ).html('名称:') );
 		var td = $( '<td>' );
 
-		this._titleInput = $( '<input>' ).addClass( 'inputtext').attr({'type':'text', 'placeholder':'(例:A図書館)'}).css( { width:'200px'} );
+		this._titleInput = $( '<input>' ).addClass( 'inputtext').attr({'type':'text', 'placeholder':'(例: 火災1)'}).css( { width:'300px'} );
 		td.append( this._titleInput );
 		tr.append( td );
 
@@ -7491,7 +7504,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		}, this ) );
 
-		frame.append( this._toggleInfoBtn );
+		//frame.append( this._toggleInfoBtn );
 
 		this._infoTable = $( '<table>' ).attr({border:0}).css( { width:'100%'} );
 		var tbody = $( '<tbody>' );
@@ -7735,7 +7748,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		td = $( '<td>' ).css( { 'width' : '30%', 'vertical-align':'middle' } );
 
 		var nameTextarea = $( '<textarea>' ).addClass( 'inputtextarea')
-			.attr( { name: 'info_table_key', 'placeholder':'(例:営業時間)', rows:1} )
+			.attr( { name: 'info_table_key', 'placeholder':'(例: 災害の種別)', rows:1} )
 			.css( { 'display':'block','width' : '100%' } ).val( key ? key : '' );
 		td.append( nameTextarea );
 		tr.append( td );
@@ -7743,7 +7756,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		var valueTextarea = $( '<textarea>' ).addClass( 'inputtextarea')
 			.css({'display':'block',width:"100%"})
-			.attr( { name: 'info_table_value', 'placeholder':'(例:10時～18時)',rows:1} ).val( value ? value : '' );
+			.attr( { name: 'info_table_value', 'placeholder':'(例: 20m)',rows:1} ).val( value ? value : '' );
 		td.append( valueTextarea );
 		tr.append( td );
 
@@ -8923,7 +8936,9 @@ GSI.ShareDialog = GSI.Dialog.extend( {
 		// 中心十字線
 		item = __createItem( this,'中心十字線を表示' );
 		ul.append( item.li );
-		this._centerCrossCheck = item.checkbox;
+		this._centerCrossCheck = true;
+//		this._centerCrossCheck = item.checkbox;
+
 
 		// 緯度経度グリッド
 		item = __createItem( this,'緯度経度グリッドを表示' );
@@ -14838,7 +14853,9 @@ GSI.QueryParams = L.Class.extend( {
 		latLngGrid : false,
 		utmGrid : false,
 		jihokuLine : false,
-		miniMap : false
+//		miniMap : false
+		miniMap : true
+
 	},
 	_layers : [],
 	_viewListDialogVisible : false,
@@ -20558,7 +20575,7 @@ function initialize_proc_map()
 						GSI.GLOBALS.map,
 						GSI.GLOBALS.sakuzuList,
 						{
-							width:350, left :windowSize.w - 370, top :45,
+							width:450, left :windowSize.w - 465, top :45,
 							effect : CONFIG.EFFECTS.DIALOG,
 							resizable : ( GSI.Utils.Browser.isSmartMobile ? false : "e,w" )
 						}
