@@ -126,7 +126,7 @@ CONFIG.UTMGRIDSTYLE = {
 	visible : false
 };
 CONFIG.UTMGRIDLABELCLASSNAME = 'utmgrid_label';
-CONFIG.UTMGRIDBOUNDARYLABEL_HIDEMETER = true; 
+CONFIG.UTMGRIDBOUNDARYLABEL_HIDEMETER = true;
 
 // 磁北線の数
 CONFIG.JIHOKULINECOUNT = 3;
@@ -385,7 +385,7 @@ CONFIG.FUNCMENU = {
 					id : CONFIG.PARAMETERNAMES.MINIMAP,
 					title : '広域図',
 					typeA : 'check',
-					defaultCheck : false
+					defaultCheck : true
 				},
 				{
 					id : CONFIG.PARAMETERNAMES.CLICKMOVE,
@@ -416,12 +416,14 @@ CONFIG.FUNCMENU = {
 					arrow : true,
 					checkCondition : function() { return GSI.GeoLocation.can; }
 				},
+				/*
 				{
 					id : 'ucode',
 					title : '場所情報コード',
 					arrow : true,
 					href : 'ucodehref'//'http://ucopendb.gsi.go.jp/ucode_app/logical_code/ucode_disp.php?lat={y}&lng={x}&zoom={z}'
-				},				
+				},
+				*/
 				{
 					title : '共有',
 					arrow : true,
@@ -448,6 +450,7 @@ CONFIG.FUNCMENU = {
 					id : 'print',
 					title : '印刷',
 					arrow : true
+					/*
 				},
 				{
 					title : '他のウェブ地図',
@@ -463,8 +466,10 @@ CONFIG.FUNCMENU = {
 							href : 'itsumonavi'//'http://www.its-mo.com/map/top_z/{y2}_{x2}_{z}/'
 						}
 					]
+					*/
 				}
 			]
+/*
 		},
 		{
 			title : '3D',
@@ -475,6 +480,7 @@ CONFIG.FUNCMENU = {
 			title : 'Globe<span style="font-size: 12px;">(試験公開)</span>',
 			arrow : true,
 			href : 'gsiglobe'//'http://maps.gsi.go.jp/globe/index_globe.html'
+*/
 		}
 	]
 };
@@ -2854,7 +2860,7 @@ GSI.Draw.Polyline = L.Draw.Polyline.extend( {
 				className: 'leaflet-div-icon leaflet-editing-icon gsi_draw_icon'
 			});
 		}
-		
+
 		L.Draw.Polyline.prototype.initialize.call(this, map, options);
 	},
 	_vertexChanged : function(latlng, added)
@@ -3229,14 +3235,14 @@ GSI.Utils.world2Japan = function(latLng){
 
 
 GSI.Utils.latLngToDMS = function(latLng) {
-	
+
 	var latLng = { lat : latLng.lat, lng : latLng.lng};
 	var latMinus = ( latLng.lat < 0 ? -1 : 1 );
 	var lngMinus = ( latLng.lng < 0 ? -1 : 1 );
-	
+
 	latLng.lat = Math.abs( latLng.lat);
 	latLng.lng = Math.abs( latLng.lng);
-	
+
 	var latD = Math.floor(latLng.lat);
 	var latM = Math.floor( ( latLng.lat - latD ) * 60 );
 	var latS = (latLng.lat-latD-(latM/60))*3600;
@@ -3307,7 +3313,7 @@ GSI.Utils.ConverUnit = function(map, shape, radius, unit_src, unit_to)
         radius = r;
     }
 
-    if(unit_src == "m"  && unit_to == "px"){ 
+    if(unit_src == "m"  && unit_to == "px"){
         var r_latlng = shape.getBounds();
         var n_p = map.latLngToContainerPoint(r_latlng._northEast);
         var s_p = map.latLngToContainerPoint(r_latlng._southWest);
@@ -3320,7 +3326,7 @@ GSI.Utils.ConverUnit = function(map, shape, radius, unit_src, unit_to)
 };
 
 GSI.Utils.Cookie = L.Class.extend( {
-	
+
 	_config : {
 		defaults : {}
 	},
@@ -3329,11 +3335,11 @@ GSI.Utils.Cookie = L.Class.extend( {
 	{
 		return this._config.raw ? s : encodeURIComponent(s);
 	},
-	_decode : function (s) 
+	_decode : function (s)
 	{
 		return this._config.raw ? s : decodeURIComponent(s);
 	},
-	_stringifyCookieValue : function(value) 
+	_stringifyCookieValue : function(value)
 	{
 		return this._encode(this._config.json ? JSON.stringify(value) : String(value));
 	},
@@ -3349,7 +3355,7 @@ GSI.Utils.Cookie = L.Class.extend( {
 			return this._config.json ? JSON.parse(s) : s;
 		} catch(e) {}
 	},
-	_read : function(s, converter) 
+	_read : function(s, converter)
 	{
 		//var value = this._config.raw ? s : this._parseCookieValue(s);
 		return this._config.raw ? s : this._parseCookieValue(s);
@@ -3359,7 +3365,7 @@ GSI.Utils.Cookie = L.Class.extend( {
 		var result = key ? undefined : {};
 		var cookies = document.cookie ? document.cookie.split('; ') : [];
 
-		for (var i = 0, l = cookies.length; i < l; i++) 
+		for (var i = 0, l = cookies.length; i < l; i++)
 		{
 			var parts = cookies[i].split('=');
 			var name = this._decode(parts.shift());
@@ -3382,7 +3388,7 @@ GSI.Utils.Cookie = L.Class.extend( {
 
 		if (typeof options.expires === 'number') {
 			var hours = options.expires, t = options.expires = new Date();
-			t.setTime(+t + hours * 1000 * 60 * 60 );// 
+			t.setTime(+t + hours * 1000 * 60 * 60 );//
 		}
 
 		return (document.cookie = [
@@ -3392,12 +3398,12 @@ GSI.Utils.Cookie = L.Class.extend( {
 			options.domain  ? '; domain=' + options.domain : '',
 			options.secure  ? '; secure' : ''
 		].join(''));
-	
+
 
 	},
 	remove : function (key, options)
 	{
-		if (this.get(key) === undefined) 
+		if (this.get(key) === undefined)
 		{
 			return false;
 		}
@@ -3429,7 +3435,7 @@ GSI.Utils.get2ndMesh = function( lat, lon ){
 	var m2lat = Math.floor( lat2 / 5 );
 	var m2lon = Math.floor( ( lon2 * 60 )  / 7.5);
 
-	return "" + lat1 + lon1 + m2lat + m2lon; 
+	return "" + lat1 + lon1 + m2lat + m2lon;
 };
 GSI.Utils.rpad = function(src, letter, num)
 {
@@ -3457,12 +3463,12 @@ L.LatLng.prototype._originalDistanceTo = L.LatLng.prototype.distanceTo;
 L.LatLng.prototype.distanceTo = function (other) {
 	other = L.latLng(other);
 	var ret = null;
-	
+
 	if ( CONFIG.USEGSIDISTANCE )
 		return GSI.Utils.DistanceCalculator.calc(this, other);
 	else
 		return L.LatLng.prototype._originalDistanceTo.call( this,other );
-	
+
 };
 
 GSI.Utils.setMixBlendMode = function( item, flg )
@@ -3601,33 +3607,33 @@ GSI.UTM.Utils = {
 		{
 		   result.north += usngStr.charAt(j++)
 		}
-		
+
 		return result;
 	},
 	_USNGtoUTM : function (zone,mylet,sq1,sq2,east,north)
-	{ 
+	{
 		var result = {};
-		
+
 		//Starts (southern edge) of N-S zones in millons of meters
 		var zoneBase = [1.1,2.0,2.9,3.8,4.7,5.6,6.5,7.3,8.2,9.1,   0, 0.8, 1.7, 2.6, 3.5, 4.4, 5.3, 6.2, 7.0, 7.9];
 
-		var segBase = [0,2,2,2,4,4,6,6,8,8,   0,0,0,2,2,4,4,6,6,6];  //Starts of 2 million meter segments, indexed by zone 
-		
+		var segBase = [0,2,2,2,4,4,6,6,8,8,   0,0,0,2,2,4,4,6,6,6];  //Starts of 2 million meter segments, indexed by zone
+
 		// convert easting to UTM
-		var eSqrs="ABCDEFGHJKLMNPQRSTUVWXYZ".indexOf(sq1);          
-		var appxEast=1+eSqrs%8; 
+		var eSqrs="ABCDEFGHJKLMNPQRSTUVWXYZ".indexOf(sq1);
+		var appxEast=1+eSqrs%8;
 
 		// convert northing to UTM
 		var letNorth = "CDEFGHJKLMNPQRSTUVWX".indexOf(mylet);
 		if (zone%2)  //odd number zone
-		var nSqrs="ABCDEFGHJKLMNPQRSTUV".indexOf(sq2) 
+		var nSqrs="ABCDEFGHJKLMNPQRSTUV".indexOf(sq2)
 		else        // even number zone
-		var nSqrs="FGHJKLMNPQRSTUVABCDE".indexOf(sq2); 
+		var nSqrs="FGHJKLMNPQRSTUVABCDE".indexOf(sq2);
 
 		var zoneStart = zoneBase[letNorth];
 		var appxNorth = Number(segBase[letNorth])+nSqrs/10;
 		if ( appxNorth < zoneStart)
-		   appxNorth += 2; 	  
+		   appxNorth += 2;
 
 		result.N=appxNorth*1000000+Number(north)*Math.pow(10,5-north.length);
 		result.E=appxEast*100000+Number(east)*Math.pow(10,5-east.length)
@@ -3646,46 +3652,46 @@ GSI.UTM.Utils = {
 		var ECC_PRIME_SQUARED = ECC_SQUARED / (1 - ECC_SQUARED);
 		var E1 = (1 - Math.sqrt(1 - ECC_SQUARED)) / (1 + Math.sqrt(1 - ECC_SQUARED));
 		var RAD_2_DEG   = 180.0 / Math.PI;
-		
+
 		// remove 500,000 meter offset for longitude
-		var xUTM = parseFloat(UTMEasting) - EASTING_OFFSET; 
+		var xUTM = parseFloat(UTMEasting) - EASTING_OFFSET;
 		var yUTM = parseFloat(UTMNorthing);
 		var zoneNumber = parseInt(UTMZoneNumber);
 
-		// origin longitude for the zone (+3 puts origin in zone center) 
-		var lonOrigin = (zoneNumber - 1) * 6 - 180 + 3; 
+		// origin longitude for the zone (+3 puts origin in zone center)
+		var lonOrigin = (zoneNumber - 1) * 6 - 180 + 3;
 
 		// M is the "true distance along the central meridian from the Equator to phi
 		// (latitude)
 		var M = yUTM / k0;
-		var mu = M / ( EQUATORIAL_RADIUS * (1 - ECC_SQUARED / 4 - 3 * ECC_SQUARED * 
+		var mu = M / ( EQUATORIAL_RADIUS * (1 - ECC_SQUARED / 4 - 3 * ECC_SQUARED *
 		              ECC_SQUARED / 64 - 5 * ECC_SQUARED * ECC_SQUARED * ECC_SQUARED / 256 ));
 
 		// phi1 is the "footprint latitude" or the latitude at the central meridian which
 		// has the same y coordinate as that of the point (phi (lat), lambda (lon) ).
-		var phi1Rad = mu + (3 * E1 / 2 - 27 * E1 * E1 * E1 / 32 ) * Math.sin( 2 * mu) 
+		var phi1Rad = mu + (3 * E1 / 2 - 27 * E1 * E1 * E1 / 32 ) * Math.sin( 2 * mu)
 		             + ( 21 * E1 * E1 / 16 - 55 * E1 * E1 * E1 * E1 / 32) * Math.sin( 4 * mu)
 		             + (151 * E1 * E1 * E1 / 96) * Math.sin(6 * mu);
 		var phi1 = phi1Rad * RAD_2_DEG;
 
 		// Terms used in the conversion equations
-		var N1 = EQUATORIAL_RADIUS / Math.sqrt( 1 - ECC_SQUARED * Math.sin(phi1Rad) * 
+		var N1 = EQUATORIAL_RADIUS / Math.sqrt( 1 - ECC_SQUARED * Math.sin(phi1Rad) *
 		          Math.sin(phi1Rad));
 		var T1 = Math.tan(phi1Rad) * Math.tan(phi1Rad);
 		var C1 = ECC_PRIME_SQUARED * Math.cos(phi1Rad) * Math.cos(phi1Rad);
-		var R1 = EQUATORIAL_RADIUS * (1 - ECC_SQUARED) / Math.pow(1 - ECC_SQUARED * 
+		var R1 = EQUATORIAL_RADIUS * (1 - ECC_SQUARED) / Math.pow(1 - ECC_SQUARED *
 		            Math.sin(phi1Rad) * Math.sin(phi1Rad), 1.5);
 		var D = xUTM / (N1 * k0);
 
 		// Calculate latitude, in decimal degrees
 		var lat = phi1Rad - ( N1 * Math.tan(phi1Rad) / R1) * (D * D / 2 - (5 + 3 * T1 + 10
-		    * C1 - 4 * C1 * C1 - 9 * ECC_PRIME_SQUARED) * D * D * D * D / 24 + (61 + 90 * 
+		    * C1 - 4 * C1 * C1 - 9 * ECC_PRIME_SQUARED) * D * D * D * D / 24 + (61 + 90 *
 		      T1 + 298 * C1 + 45 * T1 * T1 - 252 * ECC_PRIME_SQUARED - 3 * C1 * C1) * D * D *
 		      D * D * D * D / 720);
 		lat = lat * RAD_2_DEG;
 
 		// Calculate longitude, in decimal degrees
-		var lng = (D - (1 + 2 * T1 + C1) * D * D * D / 6 + (5 - 2 * C1 + 28 * T1 - 3 * 
+		var lng = (D - (1 + 2 * T1 + C1) * D * D * D / 6 + (5 - 2 * C1 + 28 * T1 - 3 *
 		        C1 * C1 + 8 * ECC_PRIME_SQUARED + 24 * T1 * T1) * D * D * D * D * D / 120) /
 		        Math.cos(phi1Rad);
 
@@ -3699,9 +3705,9 @@ GSI.UTM.Utils = {
 		{
 			var usngp = this._parseUSNGText(s,usngp);
 			if ( !usngp ) return null;
-			var coords = this._USNGtoUTM(usngp.zone,usngp.mylet,usngp.sq1,usngp.sq2,usngp.east,usngp.north) 
-			
-			if (usngp.mylet < 'N') 
+			var coords = this._USNGtoUTM(usngp.zone,usngp.mylet,usngp.sq1,usngp.sq2,usngp.east,usngp.north)
+
+			if (usngp.mylet < 'N')
 			{
 				coords.N -= NORTHING_OFFSET
 			}
@@ -3751,7 +3757,7 @@ GSI.UTM.Utils = {
 			y10mNumber = zero + Math.floor( y /10 );
 			y10mNumber = y10mNumber.substr(y10mNumber.length - num, num);
 		}
-		
+
 		var letters = GSI.UTM.Utils.findGridLetters(zone, Math.floor( y /10 ) * 10, Math.floor( x /10 ) * 10);
 		return zone + mark + letters + x10mNumber + y10mNumber;
 	},
@@ -3941,12 +3947,12 @@ GSI.UTM.Grid = L.Class.extend( {
 			this.clear();
 			return;
 		}
-		
+
 		if ( GSI.Utils.Browser.ie && GSI.Utils.Browser.version <= 8)
 		{
 			this.clear();
 		}
-		
+
 		var bounds = this._map.getBounds();
 		var zoom = this._map.getZoom();
 
@@ -4025,32 +4031,32 @@ GSI.UTM.Grid = L.Class.extend( {
 			{
 				x10mNumber = utmX;
 			}
-			
+
 			var lastMark = '';
-			
+
 			while( true )
 			{
 				var utmPoint =new Proj4js.Point(utmX,utmY);
 				var latLngPoint = Proj4js.transform(projUTM, GSI.UTM.Utils.PROJ_WORLD,utmPoint);
 				var mark = GSI.UTM.Utils.getUTMMark( latLngPoint.y );
-				
+
 				if ( lastMark != '' && lastMark != mark )
 				{
-					
+
 					var latLng = L.latLng( 24 + Math.floor( (latLngPoint.y - 24 ) / 8 ) * 8, latLngPoint.x);
-					
+
 					var changeUTMPoint = Proj4js.transform(GSI.UTM.Utils.PROJ_WORLD,projUTM,new Proj4js.Point(latLng.lng,latLng.lat ) );
-					
+
 				    utmYs.push( changeUTMPoint.y );
 				    if ( CONFIG.UTMGRIDBOUNDARYLABEL_HIDEMETER ) latLng._hideMeter = true
 					labelLatlngs.push( latLng );
-					
+
 					if ( !gridPoints2[ yIndex2 ] ) gridPoints2[ yIndex2 ] = [];
 					gridPoints2[ yIndex2 ].push( latLng );
-					
+
 					yIndex2++;
 				}
-				
+
 				lastMark = mark;
 
 				var latLng = L.latLng(latLngPoint.y, latLngPoint.x);
@@ -4058,7 +4064,7 @@ GSI.UTM.Grid = L.Class.extend( {
 				utmYs.push( utmY );
 				latlngs.push( latLng );
 				labelLatlngs.push( latLng );
-				
+
 				if ( !gridPoints[ yIndex ] ) gridPoints[ yIndex ] = [];
 				gridPoints[ yIndex ].push( latLng );
 
@@ -4107,7 +4113,7 @@ GSI.UTM.Grid = L.Class.extend( {
 					}
 					lineIndex++;
 				}
-				
+
 				for ( var i=0; i<gridPoints2.length; i++ )
 				{
 					if( !gridPoints2[i] ) continue;
@@ -4125,7 +4131,7 @@ GSI.UTM.Grid = L.Class.extend( {
 					}
 					lineIndex++;
 				}
-				
+
 				gridPoints = [];
 				gridPoints2 = [];
 				zone++;
@@ -4178,14 +4184,14 @@ GSI.UTM.Grid = L.Class.extend( {
 				for ( var i=0; i<gridPoints.length; i++ )
 				{
 					if( !gridPoints[i] ) continue;
-					
+
 					if ( this._lines.length <= lineIndex )
 					{
 						var polyline = L.polyline(gridPoints[i], lineStyle);
 						polyline._noMeasure = true;
 						layer.addLayer( polyline );
 						this._lines.push( polyline );
-						
+
 					}
 					else
 					{
@@ -4194,7 +4200,7 @@ GSI.UTM.Grid = L.Class.extend( {
 					}
 					lineIndex++;
 				}
-				
+
 				for ( var i=0; i<gridPoints2.length; i++ )
 				{
 					if( !gridPoints2[i] ) continue;
@@ -4212,7 +4218,7 @@ GSI.UTM.Grid = L.Class.extend( {
 					}
 					lineIndex++;
 				}
-				
+
 				gridPoints = [];
 				gridPoints2 = [];
 				break;
@@ -4242,7 +4248,7 @@ GSI.UTM.Grid = L.Class.extend( {
 		var endY = ( Math.floor( bounds.getNorth() / 8 ) + 1 ) * 8;
 
 		var lineStyle = $.extend( true, {} ,( style ? style : this.options.lineStyle ) );
-		
+
 		var lineIndex = 0;
 		var labelIndex = 0;
 
@@ -4772,7 +4778,7 @@ GSI.COCOTileLayer = L.Class.extend({
 	},
 	_loadTile: function (tile, tilePoint) {
 		this._adjustTilePoint(tilePoint);
-        
+
         this._loadTileAjax(this._url.concat(), tile, tilePoint);
 	},
 	_loadTileAjax: function (url, tile, tilePoint){
@@ -5391,7 +5397,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
 	{
         var fInit = true;
         if(this._initializeList_ID_Mode == "visible"){
-            if(current == null){            
+            if(current == null){
 		        for(var i = 0; i < this.visibleLayers.length; i++){
 			        var l = this.visibleLayers[i];
                     if(l.id == this._initializeList_ID_Mode_ID){
@@ -5448,7 +5454,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
                     break;
                 }
             }
-            
+
         }
 
         return current;
@@ -5654,7 +5660,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
 			legend =$( '<a>' ).html( '凡例を表示' ).addClass( 'legend' ).attr( { 'href' : item.legendUrl, 'target' : '_blank' } );
 		}
 		if ( legend )
-			infoFrame.append( legend );        
+			infoFrame.append( legend );
 
 		if ( item.html )
 		{
@@ -5690,7 +5696,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
 				}
 				this._curItem = item;
 			}
-		
+
 			if ( !this._itemTooltip )
 			{
 				this._itemTooltip = $( '<div>' ).addClass( 'gsi_layertreedialog_itemtooltip' ).hide();
@@ -5735,7 +5741,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
 				}
 
 				this._hideItemTooltip();
-				
+
 				if ( event.type == "scroll" )
 				{
 					this._toolTipViewCounter = 0;
@@ -5904,13 +5910,13 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
 	onFolderClick : function( a )
 	{
 		var item = a.data( 'data' );
-		
+
 		if (( item ) && ( item.title_evac && item.title_evac == CONFIG.layerEvacuationFolderSYS ))
 		{
 			if ( this._checkEvacuationLayer() == false )
 			{
 				GSI.GLOBALS.confirmDlg.onPositiveButtonClick = L.bind(this.onConfirmOkClick, this, item);
-				GSI.GLOBALS.confirmDlg.show();			
+				GSI.GLOBALS.confirmDlg.show();
 			}
 			else
 			{
@@ -5983,7 +5989,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
             }
         }
         else if ( target.title_evac && target.title_evac == CONFIG.layerEvacuationFolderSYS )
-        {		
+        {
             var f = false;
             if(this.mapLayerList.exists(item)){
                 f = true;
@@ -6001,7 +6007,7 @@ GSI.LayerTreeDialog = GSI.Dialog.extend( {
         }
         else{
 		    if(!this.mapLayerList.exists(item))
-		    { 
+		    {
 		        if ( item.id.indexOf("relief") >= 0 )
 		        {
 		            this.mapLayerList.append(item, null, null, null, true);
@@ -6083,7 +6089,7 @@ GSI.HelpDialog = GSI.Dialog.extend( {
 		this.frame = $( '<div>' ).attr( {
 			'style': 'padding:5px'
 		} );
-		
+
 		for (var i = 0; i < CONFIG.HELPMENU.length; i++) {
 			// リンク
 			this.LinkFrame = $( '<div>' ).attr( {
@@ -6095,7 +6101,7 @@ GSI.HelpDialog = GSI.Dialog.extend( {
 				'target': '_blank',
 				'style'	: 'color:#000; text-decoration:none'
 			} );
-			
+
 			this.LinkImg = $( '<img>' ).attr( {
 				'src'	: CONFIG.HELPMENU[i].Img,
 				'border': '0',
@@ -6104,7 +6110,7 @@ GSI.HelpDialog = GSI.Dialog.extend( {
 				'style'	: 'vertical-align:middle',
 				'alt'	: CONFIG.HELPMENU[i].Moji
 			} );
-			
+
 			this.LinkMoji = $( '<span>' ).attr( {
 				'style': 'line-height:20px; position:relative; top:2px; left:5px'
 			} ).html( CONFIG.HELPMENU[i].Moji );
@@ -6448,7 +6454,7 @@ GSI.MeasureDialog = GSI.Dialog.extend( {
 		//計測値の説明
         this.infoBtn = $("<a>").attr({"href":"http://maps.gsi.go.jp/help/howtouse.html","target":"_blank"}).addClass('gsi_measuredialog_infobtn').html("計測値の説明");
         this.frame.append(this.infoBtn);
-        
+
 		return this.frame;
 	}
 });
@@ -6641,7 +6647,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		{
 			if ( !confirm( GSI.TEXT.SAKUZU.DIALOG_EDIT_REMOVELAYERCONFIRMMSG ) ) return;
 		}
-		
+
 		item.remove();
 	},
 	_toolBtnClick : function( btnId )
@@ -7422,7 +7428,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			radius *= 1000;
 			radius = radius.toFixed(1);
 		}
-		
+
 		this._circleRadiusInput.val(radius);
 		radius = parseFloat( radius );
 		this._circleRadiusInput.val( radius );
@@ -7438,7 +7444,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			{
 				radius *= 1000;
 			}
-			
+
             radius = radius.toFixed(1);
 			this._refreshEditing( { radius: parseFloat(radius) });
 		}
@@ -7679,7 +7685,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			opacity = Math.round( ( 1-opacity ) * 100 );
 			this._fillOpacitySlider.slider( "value", opacity );
 		}
-		
+
         this._circleRadiusUnitSelect.children('option').remove();
 
 		// 円
@@ -7709,7 +7715,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
                     }
                     else
                     {
-                    
+
                         this._circleRadiusInput.val( style.radius.toFixed(1) );
                         this._circleRadiusUnitSelect.val('m');
                     }
@@ -7740,7 +7746,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			.attr( { name: 'info_table_value', 'placeholder':'(例:10時～18時)',rows:1} ).val( value ? value : '' );
 		td.append( valueTextarea );
 		tr.append( td );
-			
+
 		td = $( '<td>' ).css( { width:"24px","text-align":"center"} );
 
 		var btn = $( '<a>' ).attr( { 'href' : 'javascript:void(0);'} ).addClass( "btn" )
@@ -8097,7 +8103,7 @@ GSI.SearchResultDialog = GSI.Dialog.extend( {
 	{
 		var a = $( '<a>' ).attr( { 'href' : 'javascript:void(0);' } );
 		var title = item.properties.title;
-		
+
 		var div = $( '<div>' ).html( title ).addClass('title');
 		a.append( div );
 
@@ -8458,7 +8464,7 @@ GSI.ShareDialog = GSI.Dialog.extend( {
 		}
 
         var _location = ( GSI.ClientMode .location ? GSI.ClientMode .location : location );
-        
+
         var url      = _location.protocol + "//" + _location.host;
         var url_     = this._makeQueryString();
         if(url_.indexOf("?") == 0){
@@ -8470,7 +8476,7 @@ GSI.ShareDialog = GSI.Dialog.extend( {
         html       = html      .replace('/*url_site*/', url_site);
         html       = html      .replace(/GSI.ClientMode/g, 'ClientMode');
         javascript = javascript.replace(/GSI.ClientMode/g, 'ClientMode');
-        
+
 		html = html.replace( '/*INSERT-SCRIPT*/', javascript );
 		this._textarea.focus();
 		this._textarea.val( html );
@@ -8617,7 +8623,7 @@ GSI.ShareDialog = GSI.Dialog.extend( {
                     if ( ls != '' ){
 				        queryString += ( queryString != '' ? '&' : '#' ) + ls;
                     }
-			
+
 			        if ( disp != '' )
 			        {
                         var disp_trim = "";
@@ -8673,7 +8679,7 @@ GSI.ShareDialog = GSI.Dialog.extend( {
 		var visibleDialogs = {};
 		visibleDialogs[ CONFIG.DIALOGPARAMETER.VIEWLISTDIALOG] = this._visibleViewListDlgCheck.is( ':checked' );
 		visibleDialogs[ CONFIG.DIALOGPARAMETER.LAYERTREEDIALOG] = this._visibleLayerTreeDlgCheck.is( ':checked' );
-        
+
 		var queryParams = this.pageStateManager.getQueryParams( {
 			hcList : hcList,
 			vsInfo : {
@@ -9005,7 +9011,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 
         this._ButtonTxtAdd = $("<a>").css({"position":"absolute",'left':'5px','bottom':'5px','cursor':'pointer'}).addClass('view_list_dialog_button').html("<img src='./image/system/add.png' style='position:relative;left:-2px;top:3px;' />情報追加/ベースマップ切替");
         this._RbtnTxtAdd = $("<a>").css({"position":"absolute",'right':'4px','bottom':'5px','cursor':'pointer'}).addClass('view_list_dialog_button').html("リセット");
-		
+
 		var frameRange            = $( '<div>' ).css({ 'position':'absolute','right':'5px','bottom':'5px','opacity':'1'});
         /*
         this._ButtonRangeSwitch   = new GSI.OnOffSwitch( {className:'onoff', checked:this.cocoTileLayer.getVisible(), title: ""} );
@@ -9082,10 +9088,10 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 	{
 		GSI.GLOBALS.baseLayer.setActiveIndex(0);
 		var std = GSI.GLOBALS.baseLayer.baseLayerList[0];
-		
+
 		this._removeAll();
 		this.mapLayerList.append( std );
-		
+
 		if ( !GSI.GLOBALS.map.hasLayer(GSI.GLOBALS.baseLayer) )
 		{
 			GSI.GLOBALS.map.addLayer(GSI.GLOBALS.baseLayer);
@@ -9113,7 +9119,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 			if ( !item._visibleInfo._isHidden  )
 			{
 				item._onOffSwitch.checked( false );
-				
+
 				item._visibleInfo._isHidden = true;
 				this.map.removeLayer( item._visibleInfo.layer );
 			}
@@ -9262,14 +9268,14 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
                 vClassTitle = 'title_mt';
                 enablemt = true;
             }
-        
+
         }
 		var frame = $( '<div>' );
 		if ( isTile ) frame.addClass( 'tille' );
 		li.data( { 'data' : item } );
 
         a.append( frame );
-        
+
 		// タイトル
 		var title = $( '<div>' ).addClass( vClassTitle );
 		var icon = item.iconUrl;
@@ -9333,13 +9339,13 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
             	//{
             	//	item._visibleInfo.blend = true;
             	//}
-            	
+
                 var mp = new GSI.ToggleSwitch( {className:'toggle', checked:(item._visibleInfo.blend)} );
                 //var mp = new GSI.OnOffSwitch( {className:'filetext', checked:(item._visibleInfo.blend)} );
                 var mpElement = mp.getElement();
                 mpElement.addClass("multiplytile");
                 mpElement.on( 'change', L.bind(this._onBlendSwitchChange, this, a, mp ) );
- 
+
                 li.append( mpElement );
                 if (item._visibleInfo.blend == true)
                 {
@@ -9593,7 +9599,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 				}
 				this._curItem = item;
 			}
-		
+
 			if ( !this._itemTooltip )
 			{
 				this._itemTooltip = $( '<div>' ).addClass( 'gsi_layertreedialog_itemtooltip' ).hide();
@@ -9648,7 +9654,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
                     }
 				    this._hideItemTooltip();
                 }
-				
+
 				if ( event.type == "scroll" )
 				{
 					this._toolTipViewCounter = 0;
@@ -9699,7 +9705,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
             var v1 = v - (v2 * 5);
             v = (v2 - 1) * 5 + v1;
         }
-        
+
         else{
             v++;
         }
@@ -9770,20 +9776,20 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 	    {
 	    	var l = this.mapLayerList.getList();
 	    	for(i = 0 ; i < l.length; i++ )
-	    	{				
+	    	{
 	    		if ( l[i].id.indexOf(CONFIG.layerEvacuationHeader) >= 0 )
 	    		{
 	    			return true;
-	    		}				
+	    		}
 	    	}
 	    	var tl = this.mapLayerList.getTileList();
 
 	    	for(i = 0 ; i < tl.length; i++ )
-	    	{				
+	    	{
 	    		if ( tl[i].id.indexOf(CONFIG.layerEvacuationHeader) >= 0 )
 	    		{
 	    			return true;
-	    		}			
+	    		}
 	    	}
 	    }
 		if( GSI.GLOBALS.layerTreeDialog.current )
@@ -9793,7 +9799,7 @@ GSI.ViewListDialog = GSI.Dialog.extend( {
 				return true;
 			}
 		}
-		
+
 
 	    GSI.GLOBALS.evacDialog.hide();
 		CONFIG.layerEvacuationIsConfirmOK = false;
@@ -9911,7 +9917,7 @@ GSI.EvacDialog = L.Control.extend( {
 		this._container = L.DomUtil.create('div', 'evac_dialog');
 		//content
 		var frame =$('<div>').addClass('evac_dialog_content').html(this.createContent());
-		
+
 		$(this._container).css({'opacity':'0.7'}).append(frame);
 
 		return this._container
@@ -9993,7 +9999,7 @@ GSI.DialogManager = L.Class.extend( {
 			var opacity = 0.6 + ( 0.4 / this.visibleList.length * idx );
 			if (this.visibleList[i].options.containerClass != "evac_dialog")
 			{
-				this.visibleList[i].css({'z-index':zIndex, opacity: opacity} );			
+				this.visibleList[i].css({'z-index':zIndex, opacity: opacity} );
 			}
 			this.visibleList[i].addClass( "deactive");
 
@@ -10009,7 +10015,7 @@ GSI.DialogManager = L.Class.extend( {
 			}
 			else
 			{
-				this.visibleList[ this.visibleList.length - 1 ].css({'z-index':zIndex, opacity: 0.6} );				
+				this.visibleList[ this.visibleList.length - 1 ].css({'z-index':zIndex, opacity: 0.6} );
 			}
 			this.visibleList[i].removeClass( "deactive");
 		}
@@ -10163,7 +10169,7 @@ GSI.EvacuationManager = L.Class.extend({
 	accept : function()
 	{
 		var d;
-		
+
 		if (this._queryParams.params["disp"])
 		{
 			d = this._queryParams.params["disp"];
@@ -10235,7 +10241,7 @@ GSI.EvacuationManager = L.Class.extend({
 						}
 						dct++;
 					}
-				}			
+				}
 			}
 		}
 	},
@@ -10500,7 +10506,7 @@ GSI.Footer = L.Class.extend( {
 			+ '&nbsp;'  +
 			(center.lng < 0 ? '-' : '') + dms.lng.d + '度' + dms.lng.m + '分' + ( Math.round( dms.lng.s * 100 ) / 100 ).toFixed(2)  + '秒'
 			);
-		
+
 		$( '#latlng_10' ).html(
 			( Math.round( center.lat * 1000000 ) / 1000000 ).toFixed(6)
 			+ ','
@@ -10696,7 +10702,7 @@ GSI.Footer = L.Class.extend( {
         var f = false;
         var oCanvasTile        = document.createElement("canvas");
             oCanvasTile.width  = this.DemPng.width;
-            oCanvasTile.height = this.DemPng.height;  
+            oCanvasTile.height = this.DemPng.height;
         var oCanvasTileContext = oCanvasTile.getContext("2d");
         oCanvasTileContext.drawImage(this.DemPng, 0, 0);
         if(oCanvasTile.height >= this.vY_TilePX){
@@ -10910,7 +10916,7 @@ GSI.HashOptions = L.Class.extend( {
             if(v != ""){
                 hash += "&" + v;
             }
-            
+
             //基本設定：乗算の設定
             v = GSI.GLOBALS.pageStateManager.getBlendSetting();
             if(v != ""){
@@ -10995,7 +11001,7 @@ GSI.HashOptions = L.Class.extend( {
             var options = hash.substr(n);
             if(this.vHashOptions != options){
                 this.eHashChange = true;
-				
+
 				if (options.indexOf(CONFIG.layerEvacuationHeader) >= 0)
 				{
 					this.forEvacuation(options);
@@ -11034,7 +11040,7 @@ GSI.HashOptions = L.Class.extend( {
 		}
 		if ( layers && ( vl && vl.length > 0 ) )
 		{
-			
+
 			for( var i =0; i < layers.length; i++ )
 			{
 				for( var j=0; j < vl.length; j++ )
@@ -11044,7 +11050,7 @@ GSI.HashOptions = L.Class.extend( {
 						bfind = true;
 						break;
 					}
-					
+
 				}
 				if ( bfind == false )
 				{
@@ -11094,7 +11100,7 @@ GSI.HashOptions = L.Class.extend( {
 	},
 	forEvacuation : function ( options )
 	{
-		
+
 		var disp = "";
 		var ops = {};
 		var op = options.split("&");
@@ -11103,7 +11109,7 @@ GSI.HashOptions = L.Class.extend( {
 			var it = op[i].split("=");
 			ops[it[0]] = it[1];
 		}
-		
+
 		if (ops["disp"])
 		{
 			//逆順に並べておく
@@ -11150,7 +11156,7 @@ GSI.HashOptions = L.Class.extend( {
 					//with lcd
 					for (var i = ls.length-1; i>=0; i--)
 					{
-						
+
 						if ((ops["lcd"] != ls[i]) && (ls[i].indexOf(CONFIG.layerEvacuationHeader)>=0))
 						{
 							ls.splice(i, 1);
@@ -11190,7 +11196,7 @@ GSI.HashOptions = L.Class.extend( {
 					}
 				}
 				ops["ls"] = ls.join("%7C");
-			}		
+			}
 		}
 		var newop = "";
 		for( var key in ops )
@@ -11246,7 +11252,7 @@ GSI.HashOptions = L.Class.extend( {
 				{
 					ops["lcd"] = null;
 				}
-			}		
+			}
 		}
 		var newop = "";
 		for( var key in ops )
@@ -11345,7 +11351,7 @@ GSI.Header = L.Class.extend( {
 		this.topMessage .hide();
 		this.header.addClass( 'border_bottom' );
 		this.topMessageVisible=false;
-		
+
 		try
 		{
 			if ( this.options.expires > 0 )
@@ -11659,12 +11665,12 @@ GSI.JihokuLine = L.Class.extend( {
 		var idx1 = variation.indexOf(",");
 		var nVariation = parseFloat(variation.substring(0, idx1));
 		var sVariation = variation.substring(idx1+1);
-		
+
 		//円周率
 		var pi = Math.PI;
 		var center = this._map.getCenter();
 		var rad = nVariation * pi / 180;	// 角度をラジアンに変換
-		
+
 		// 地図中央の経度
 		var centerLng = this._map.getCenter().lng;
 		var bounds = this._map.getBounds();
@@ -11683,17 +11689,17 @@ GSI.JihokuLine = L.Class.extend( {
 		for(var i = 0; i < count; i++)
 		{
 			var latLngArr = null;
-			
+
 			if ( Math.tan( rad) >= 0 )
 			{
-				latLngArr =[ 
-					L.latLng(bounds.getNorth(), bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) ), 
-					L.latLng(bounds.getSouth(), bounds.getWest()  + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) + mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) 
-				]; 
+				latLngArr =[
+					L.latLng(bounds.getNorth(), bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) ),
+					L.latLng(bounds.getSouth(), bounds.getWest()  + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) + mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180))
+				];
 			} else {
-				latLngArr =[ 
-					L.latLng(bounds.getNorth(), bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) + mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)), L.latLng(bounds.getSouth(), 
-					bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1)) 
+				latLngArr =[
+					L.latLng(bounds.getNorth(), bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1) + mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)), L.latLng(bounds.getSouth(),
+					bounds.getWest() + (mapWidth - mapHeight * Math.tan(rad) / Math.cos(center.lat * pi / 180)) * i / (count - 1))
 				];
 			}
 
@@ -11712,7 +11718,7 @@ GSI.JihokuLine = L.Class.extend( {
 		}
 
 		var KKK_NUM = sVariation;
-		
+
 		if (!this._label) {
 
 			// ラベル表示
@@ -11805,7 +11811,7 @@ GSI.LatLngGrid = L.Class.extend( {
 			this.clear();
 			return ;
 		}
-		
+
 		if ( GSI.Utils.Browser.ie && GSI.Utils.Browser.version <= 8)
 		{
 			this.clear();
@@ -11962,7 +11968,7 @@ GSI.LatLngGrid = L.Class.extend( {
 		// 不要なライン、ラベルの削除
 		this._clearLayerArr( this._lines, lineNo );
 		this._clearLayerArr( this._labels, labelNo );
-		
+
 		if ( this._layer  ) this._layer.bringToBack();
 	},
 	_clearLayerArr : function( arr, idx )
@@ -12516,7 +12522,7 @@ GSI.MapLayerList = L.Class.extend( {
 		    info._visibleInfo.blend = ( blend == "1" ? true : false );
 		}
 		info.initialOpacity = null;
-		
+
 		if ( info.layerType=="tile" )
 		{
             var fBaseMap = false;
@@ -12535,7 +12541,7 @@ GSI.MapLayerList = L.Class.extend( {
 			if ( ( info.maxZoom == 0 || info.maxZoom ) && info.maxZoom != "" ) options.maxZoom =info.maxZoom;
 			if ( info.maxNativeZoom && info.maxNativeZoom!="" ) options.maxNativeZoom =info.maxNativeZoom;
 			if ( info.attribution ) options.attribution =info.attribution;
-			
+
 			info._visibleInfo.layer = new GSI.TileLayer(info.url,options);
 			if ( isHide)
 				info._visibleInfo._isHidden = true;
@@ -12593,12 +12599,12 @@ GSI.MapLayerList = L.Class.extend( {
 			info._visibleInfo .layer.on("loadstart", L.bind( this.onLayerLoadStart, this, info._visibleInfo.layer, "GeoJSON"  ) );
 			info._visibleInfo .layer.on( "load", L.bind( function(e){ this.onLayerLoad(e.src) },this));
 			info._visibleInfo .layer .load();
-			
+
 			if ( isHide)
 				info._visibleInfo._isHidden = true;
 			else
 				this.map.addLayer(info._visibleInfo.layer);
-			
+
 			this.list.unshift( info );
 			this._initZIndexOffset( this.list, 10000 );
 
@@ -12727,7 +12733,7 @@ GSI.MapLayerList = L.Class.extend( {
 			this.tileList.unshift( info );
 			this._initZIndex( this.tileList );
 		}
-		
+
 		if( info._visibleInfo.layer )
 		{
             if(info.parent && info.parent != null && info.parent.title_sys == CONFIG.layerBaseFolderSYS){
@@ -12745,7 +12751,7 @@ GSI.MapLayerList = L.Class.extend( {
 			    }
             }
 		}
-		
+
 		this.fire('change');
 	},
 	_showLoading : function(title)
@@ -12782,7 +12788,7 @@ GSI.MapLayerList = L.Class.extend( {
 	_initZIndexOffset : function( list, offset )
 	{
 		var zIndex = 0;
-		
+
 		for ( var i=list.length-1; i>= 0; i-- )
 		{
 			var info = list[i];
@@ -13272,7 +13278,7 @@ GSI.MapMouse = L.Class.extend( {
 		map.on('dblclick',L.bind( this.onMapDblClick, this ) );
 
 		L.setOptions(this, options);
-		
+
 		this.map.doubleClickZoom.enable();
 	},
 	onZoomEnd : function(e)
@@ -13330,7 +13336,7 @@ GSI.MapMouse = L.Class.extend( {
 		if ( this.clickMoveVisible )
 		{
 			this._startClickTimer( e.latlng );
-			
+
 		}
 	},
 	_move : function(latlng)
@@ -13353,7 +13359,7 @@ GSI.MapMouse = L.Class.extend( {
 	onMapDblClick : function( e)
 	{
 		if ( !this._clickTimerId  ) return;
-		
+
 		this._clearClickTimer ();
 		var zoom = this.map.getZoom();
 		if ( zoom < 18 )
@@ -14062,12 +14068,12 @@ GSI.OnOffSwitch = L.Class.extend( {
 			this.input.attr( {"checked": false} );
 			this.input.prop( {"checked": false} );
 		}
-		
+
 		if ( GSI.Utils.Browser.ie && GSI.Utils.Browser.version <= 8 )
 		{
 			this._initCheckBoxIE8();
 		}
-		
+
 		return this.input.is( ':checked' );
 	}
 });
@@ -14173,12 +14179,12 @@ GSI.ToggleSwitch = L.Class.extend( {
 			this.input.attr( {"checked": false} );
 			this.input.prop( {"checked": false} );
 		}
-		
+
 		if ( GSI.Utils.Browser.ie && GSI.Utils.Browser.version <= 8 )
 		{
 			this._initCheckBoxIE8();
 		}
-		
+
 		return this.input.is( ':checked' );
 	}
 });
@@ -14210,10 +14216,10 @@ GSI.PagePrinter = L.Class.extend( {
 	},
 	hide : function()
 	{
-		
+
 		$( document.body ).css( {"overflow":"hidden", "height": "100%"} );
 		$( "html" ).css( {"overflow":"hidden", "height": "100%"} );
-			
+
 		var children = $( document.body ).children();
 		for ( var i=0; i<children.length; i++ )
 		{
@@ -14262,7 +14268,7 @@ GSI.PagePrinter = L.Class.extend( {
 				},
 			this ) );
 		}
-		
+
 		this._originalMap.invalidateSize(false);
 		this._container.fadeOut('fast', L.bind( function(){
 
@@ -14310,7 +14316,7 @@ GSI.PagePrinter = L.Class.extend( {
                 else{
     				this._map.addLayer( tileList[i]._visibleInfo.layer, null, tileList[i]._visibleInfo.blend );
     				GSI.Utils.setMixBlendMode( tileList[i], tileList[i]._visibleInfo.blend );
-			
+
                 }
 			}
 		}
@@ -14320,7 +14326,7 @@ GSI.PagePrinter = L.Class.extend( {
 
 			this._baseLayer.isGrayScale = this._originalBaseLayer.isGrayScale
 			this._baseLayer.options.opacity = this._originalBaseLayer.options.opacity;
-			
+
 		    this._baseLayer.setHighQuality( hq );
 		    this._baseLayer.addTo(this._map);
         }
@@ -14388,17 +14394,17 @@ GSI.PagePrinter = L.Class.extend( {
 		}
 
 		this._container.fadeIn('fast', L.bind( function(){
-			
+
 			$( document.body ).css( {"overflow":"auto", "height": "auto"} );
 			$( "html" ).css( {"overflow":"auto", "height": "auto"} );
-			
+
 			var children = $( document.body ).children();
 			for ( var i=0; i<children.length; i++ )
 			{
 				if ( children[i] != this._container[0] )
 				{
 					var child = $( children[i] );
-					
+
 					if ( child.is(":visible") )
 					{
 						child.data( { '_before_print_visible':true } ) ;
@@ -14407,12 +14413,12 @@ GSI.PagePrinter = L.Class.extend( {
 					else
 					{
 						child.data( { '_before_print_visible':false } ) ;
-						
+
 					}
-				
+
 				}
 			}
-			
+
 			this._map.invalidateSize(false);
 		}, this ) );
 	},
@@ -14426,12 +14432,12 @@ GSI.PagePrinter = L.Class.extend( {
 		    this._baseLayer.setHighQuality( hq );
         }
 		var paperSize = this.printSize2MapSize( paperSizeVal );
-		
+
 		this._mapContainer.css( { width:paperSize.w + 'px', height: paperSize.h + 'px' } );
 		this._map.invalidateSize(true);
-		
+
 		$(window).resize();
-		
+
 	},
 	_qualityChange : function()
 	{
@@ -14442,8 +14448,8 @@ GSI.PagePrinter = L.Class.extend( {
 
 	_create : function()
 	{
-		this._container = $( '<div>' ).addClass( 'gsi_pageprinter' );//.click( L.bind( function(){this.hide();},this) );		
-		
+		this._container = $( '<div>' ).addClass( 'gsi_pageprinter' );//.click( L.bind( function(){this.hide();},this) );
+
 		this._headerContainer = $( '<div>' ).addClass( 'header_container' );
 		this._mapContainer = $( '<div>' ).addClass( 'map_container' );
 
@@ -14494,7 +14500,7 @@ GSI.PagePrinter = L.Class.extend( {
 		this._container.append( this._mapContainer );
 
 		this._container.hide();
-		
+
 		$( document.body) .append( this._container );
 	},
 	printSize2MapSize : function(size)
@@ -14582,7 +14588,7 @@ GSI.PageStateManager = L.Class.extend( {
                 fList = false;
                 if(tileIdList[i]._visibleInfo && !tileIdList[i]._visibleInfo._isHidden){
                     fList = true;
-                    
+
                     if(i==tileIdList.length-1){
                         fGrayScale = true;
                     }
@@ -14904,7 +14910,7 @@ GSI.QueryParams = L.Class.extend( {
 	getBaseMapGrayScale : function()
 	{
 		return this._baseMapGrayScale;
-	},        
+	},
 	getLayers : function()
 	{
 		return this._layers;
@@ -15032,11 +15038,11 @@ GSI.QueryParams = L.Class.extend( {
             vParams = this.params["ls"];
 
 			var disp = this.params["disp"];
-			
+
 			var layers = this.params["ls"].split( '|' );
-            
+
             var blds = this.params["blend"];
-            
+
 			for ( var i=0; i<layers.length; i++ )
 			{
 				if ( $.trim( layers[i] ) == '' ) continue;
@@ -15058,7 +15064,7 @@ GSI.QueryParams = L.Class.extend( {
                 		}
                 	}
                 }
-                
+
 				if ( disp && disp.length > i)
 				{
 					if ( disp.charAt(i) == '0' )
@@ -15487,7 +15493,7 @@ GSI.SakuzuListItem = L.Class.extend( {
             }
 			if ( this._editingEditingLayer.setRadius && radius){ this._editingEditingLayer.setRadius( radius ); }
 			if ( this._editingEditingLayer._mRadius  && radius){ this._editingEditingLayer._mRadius = radius;   }
-			
+
             if(radius){
                 if(this._editingType == GSI.SakuzuListItem.POINT_CIRCLE){
                     if(this._editingPathList.length >= 1){
@@ -15596,7 +15602,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		this.editMode = GSI.SakuzuListItem.EDIT;
 
 		this._editingType = id;
-		
+
 		if ( !this._editingFreatureGroup )
 		{
 			this._editingFreatureGroup = L.featureGroup();
@@ -15607,9 +15613,9 @@ GSI.SakuzuListItem = L.Class.extend( {
 			layer._information = this._getLayerInfo( layer );
 		}
 		this._editingEditingLayerInfo = $.extend( true, {}, layer._information ? layer._information : {} );
-		
+
 		this._editingOriginalLayer = layer;
-		
+
 		( layer._parent ? layer._parent : this._layer ).removeLayer( layer );
 		this._editingEditingLayer = this._cloneLayer( this._editingType, layer );
         this._editingEditingLayerSRC = $.extend(true, {}, this._editingEditingLayer);
@@ -15624,7 +15630,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 	_cloneLatLngs : function( src )
 	{
 		var result  = [];
-		
+
 		for ( var i=0; i<src.length; i++ )
 		{
 			if ( src[i].lat )
@@ -15632,7 +15638,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				result.push( L.latLng( src[i].lat, src[i].lng ) );
 			}
 		}
-		
+
 		return result;
 	},
 	_cloneLayer : function( layerType, layer )
@@ -15918,7 +15924,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 
             layer._boundRect = rect;
 			if ( rect ){
-                rect.id = layer.id;                
+                rect.id = layer.id;
                 this._editingBoundsRects.addLayer( rect );
             }
 		}
@@ -16030,7 +16036,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 			}
 			layer._boundRect = rect;
 			if ( rect ){
-                rect.id = layer.id;                
+                rect.id = layer.id;
                 this._editingBoundsRects.addLayer( rect );
             }
 		}
@@ -16324,12 +16330,12 @@ GSI.SakuzuListItem = L.Class.extend( {
         this.editFinish_CircleMarker();
 
 		if (this.editMode == GSI.SakuzuListItem.NONE ) return;
-		
+
 		this._editingEditingLayer._parent = ( this._editingOriginalLayer  ?this._editingOriginalLayer._parent : null );
 		this._destroyEditPathList();
 	 	this._editingFreatureGroup.removeLayer( this._editingEditingLayer );
 		( this._editingEditingLayer._parent ? this._editingEditingLayer._parent : this._layer ).addLayer( this._editingEditingLayer );
-		
+
 		if ( this._editingOriginalLayer && this._editingOriginalLayer._clickEditHandler )
  		{
 			this._editingOriginalLayer.off( 'click', this._editingOriginalLayer._clickEditHandler );
@@ -16377,7 +16383,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 			{
 				layer._information = this._getLayerInfo( layer );
 			}
-		
+
  			var title = layer._information.title;
  			var description = layer._information.description;
 
@@ -16411,7 +16417,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 			{
 				this._bindPopup( layers[i]);
 			}
-			
+
 		}
 		this._bindPopup();
 		this._destroyEditSelectObjects();
@@ -16425,7 +16431,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 			( this._editingOriginalLayer._parent ? this._editingOriginalLayer._parent : this._layer ).addLayer( this._editingOriginalLayer );
 			this._editingOriginalLayer = null;
 		}
-		
+
  		this._destroyEditObjects();
 
  		if ( this.editMode == GSI.SakuzuListItem.EDIT  )
@@ -16552,7 +16558,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				{
 					value= '';
 				}
-				
+
 				trHtml += '<tr><td>' + GSI.Utils.encodeHTML(key) + '</td><td>' + value + '</td></tr>' + '\n';
 			}
 		}
@@ -17119,7 +17125,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		{
 			result.data += ' ' + latLngs[0].lng + "," + latLngs[0].lat;
 		}
-			
+
 		result.data += '</coordinates>\n' +
 		'</LinearRing>' + '\n' +
 		'</outerBoundaryIs>' + '\n' +
@@ -17168,7 +17174,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		for ( var i= 0; i<latLngs.length; i++ )
 		{
 			result.data += ( i > 0 ? ' ' : '' ) + latLngs[i].lng + "," + latLngs[i].lat;
-			
+
 		}
 		result.data += '</coordinates>\n' +
 		'</LineString>\n' +
@@ -17273,7 +17279,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 	{
 		if ( !info ) return {};
 		var result = {};
-		
+
 		if ( info.title && info.title != '' )
 			result[ 'name' ] = info.title;
 		if ( info.description && info.description != '' )
@@ -17313,7 +17319,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		result.properties[ "_color"] = color;
 		result.properties[ "_opacity"] = opacity;
 		result.properties[ "_weight"] = parseInt(weight);
-		
+
 		if ( layer.feature &&  layer.feature.properties )
 		{
 			for ( var key in layer.feature.properties )
@@ -17325,7 +17331,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 						result.properties["_"+key] = options[ key ];
 				}
 			}
-			
+
 		}
 		return result;
 	},
@@ -17358,7 +17364,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		result.properties[ "_fillColor"] = fillColor;
 		result.properties[ "_fillOpacity"] = fillOpacity;
 		result.properties[ "_radius"] = parseFloat( parseFloat(layer.getRadius() ).toFixed( 1 ) );
-		
+
 		if ( layer.feature &&  layer.feature.properties )
 		{
 			for ( var key in layer.feature.properties )
@@ -17373,7 +17379,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				}
 			}
 		}
-		
+
 		return result;
 	},
 	_makeGeoJSONPoint : function( layer )
@@ -17411,7 +17417,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		if ( ! result.properties[ "_iconSize"]  ) delete result.properties[ "_iconSize"] ;
 
 		if ( ! result.properties[ "_iconAnchor"]  ) delete result.properties[ "_iconAnchor"] ;
-		
+
 		if ( layer.feature &&  layer.feature.properties )
 		{
 			for ( var key in layer.feature.properties )
@@ -17426,7 +17432,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				}
 			}
 		}
-		
+
 		return result;
 	},
 	_makeGeoJSONPolygon : function( layer )
@@ -17460,7 +17466,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		result.properties[ "_weight"] = parseInt(weight);
 		result.properties[ "_fillColor"] = fillColor;
 		result.properties[ "_fillOpacity"] = fillOpacity;
-		
+
 		if ( layer.feature &&  layer.feature.properties )
 		{
 			for ( var key in layer.feature.properties )
@@ -17473,7 +17479,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				}
 			}
 		}
-		
+
 		return result;
 	}
 } );
@@ -17522,7 +17528,7 @@ GSI.SakuzuList = L.Class.extend( {
 					"features": options.defaultList[i].features
 				};
 				var item = this._loadJSON( fileName, geoJSON, options.defaultList[i], noExt );
-				
+
 				if ( i==0 && !item )
 				{
 					this._list.push( new GSI.SakuzuListItem( this, null, GSI.TEXT.SAKUZU.SAKUZUTITLE, '', null, true ) );
@@ -17884,7 +17890,7 @@ GSI.Searcher = L.Class.extend( {
 			else if ( qType == this.QUERY_EXCHANGE )
 			{
 				var latLng = this.parseLatLngText3( query );
-				
+
 				if (!latLng)
 				{
 					alert( '緯度経度を正しく入力して下さい\n');
@@ -18000,7 +18006,7 @@ GSI.Searcher = L.Class.extend( {
 				return this.QUERY_LATLNGNE;
 			}
 			else if ( ( q.match(/^(?:N|北緯)*([0-9]{1,3}[度°])([0-9]{1,2}['分′])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*(?:,|\s)(?:E|東経)*([0-9]{1,3}[度°])([0-9]{1,2}['分′])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*$/) )
-			 		|| 
+			 		||
 			 		( q.match(/^(?:E|東経)*([0-9]{1,3}[度°])([0-9]{1,2}['分′])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*(?:,|\s)(?:N|北緯)*([0-9]{1,3}[度°])([0-9]{1,2}['分′])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*$/) ) )
 			{
 				//°′″表記
@@ -18069,10 +18075,10 @@ GSI.Searcher = L.Class.extend( {
 	{
 		s = $.trim(s);
 		s = s.replace( ',', ' ' );
-		
+
 		var matchArr =  s.match(/^(N|北緯)*([0-9]{1,3}[度°])([0-9]{1,2}[分′'])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*(?:,|\s)(E|東経)*([0-9]{1,3}[度°])([0-9]{1,2}[分′'])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*$/);
 		var revflg = false;
-		
+
 		if (!matchArr)
 		{
 			matchArr =  s.match(/^(E|東経)*([0-9]{1,3}[度°])([0-9]{1,2}[分′'])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*(?:,|\s)(N|北緯)*([0-9]{1,3}[度°])([0-9]{1,2}[分′'])*([0-9]{1,2}(?:\.[0-9]+)*[秒″\"])*$/);
@@ -18083,16 +18089,16 @@ GSI.Searcher = L.Class.extend( {
 		{
 			lath = parseInt(matchArr[2]);
 			lonh = parseInt(matchArr[6]);
-			
+
 			latm = matchArr[3] ? parseFloat(matchArr[3]) / 60 : 0;
 			lonm = matchArr[7] ? parseFloat(matchArr[7]) / 60 : 0;
 
 			lats = matchArr[4] ? parseFloat(matchArr[4]) / 3600 : 0;
 			lons = matchArr[8] ? parseFloat(matchArr[8]) / 3600 : 0;
-			
+
 			var la = lath + latm + lats;
 			var lo = lonh + lonm + lons;
-			
+
 			if ((revflg) || (!matchArr[1] && !matchArr[5] && ( la > lo )))
 			{
 				var t = la;
@@ -18102,7 +18108,7 @@ GSI.Searcher = L.Class.extend( {
 			return [la, lo];
 		}
 		return null;
-		
+
 	},
 	parseLatLngText4 : function( s )
 	{
@@ -18110,7 +18116,7 @@ GSI.Searcher = L.Class.extend( {
 
 		var matchArr = s.match(/^(N|北緯)*([0-9]{1,3}(?:\.[0-9]+)*)(?:,|\s)(E|東経)*([0-9]{1,3}(?:\.[0-9]+)*)/)
 		var revflg = false;
-		
+
 		if (!matchArr)
 		{
 			matchArr = s.match(/^(E|東経)*([0-9]{1,3}(?:\.[0-9]+)*)(?:,|\s)(N|北緯)*([0-9]{1,3}(?:\.[0-9]+)*)/)
@@ -18119,12 +18125,12 @@ GSI.Searcher = L.Class.extend( {
 
 		var lat, lon;
 		try{
-		
+
 			if (matchArr && matchArr.length == 5)
 			{
 				lat = parseFloat( matchArr[2] );
 				lon = parseFloat( matchArr[4] );
-				
+
 				if ( (revflg) || (!matchArr[1] && !matchArr[3] && lat > lon) )
 				{
 					var t = lat;
@@ -18133,14 +18139,14 @@ GSI.Searcher = L.Class.extend( {
 				}
 				return [lat, lon];
 			}
-			
+
 			return null;
 		}
 		catch( e )
 		{
 			return null;
 		}
-		
+
 	},
 	parseLatLngText : function( s )
 	{
@@ -18156,7 +18162,7 @@ GSI.Searcher = L.Class.extend( {
 			var lat = parseFloat( latLng[0] );
 			var lng = parseFloat( latLng[1] );
 			result = [ lat< lng ? lat: lng, lat< lng ? lng: lat ];
-			
+
 			return result;
 		}
 		catch( e )
@@ -18403,7 +18409,7 @@ GSI.Control.CopyrightPanel = L.Control.extend({
 		height: 10,
 	},
 
-	
+
 
 	hideText: 'Hide CopyrightPanel',
 
@@ -18430,7 +18436,7 @@ GSI.Control.CopyrightPanel = L.Control.extend({
 		//alink.style.color='#000000';
 
 		this._urlPanel = alink;
-		
+
 		return this._container;
 	},
 
@@ -18701,7 +18707,7 @@ GSI.KML = L.FeatureGroup.extend({
 			url = url.replace( '{right}', bounds.getEast() );
 			url = url.replace( '{bottom}', bounds.getSouth() );
 		}
-		
+
 		$.support.cors = true;
 		this.ajax = $.ajax({
 			type: "GET",
@@ -18810,7 +18816,7 @@ GSI.KML = L.FeatureGroup.extend({
 		}
 	},
 	setMarkerZIndex : function( zIndex ) {
-		
+
 		this.options.zIndexOffset = zIndex;
 		L.FeatureGroup.prototype.setMarkerZIndex.call(this,this.options.zIndexOffset);
 	},
@@ -18829,15 +18835,15 @@ GSI.KML = L.FeatureGroup.extend({
 				this.fire('addlayer', {
 					layer: layers[i]
 				});
-				
+
 				this.addLayer(layers[i]);
 			}
-			
+
 			if ( this.options.zIndexOffset )
 			{
 				this.setMarkerZIndex( this.options.zIndexOffset );
 			}
-			
+
 			this.latLngs = GSI.KML.getLatLngs(xml);
 			if ( this.opacity )
 			{
@@ -18886,9 +18892,9 @@ L.Util.extend(GSI.KML, {
 	// Return false if e's first parent Folder is not [folder]
 	// - returns true if no parent Folders
 	_check_folder: function (e, folder) {
-		
+
 		e = ( e.parentElement ?  e.parentElement : e.parentNode );
-		
+
 		while (e && e.tagName !== 'Folder')
 		{
 			e = ( e.parentElement ?  e.parentElement : e.parentNode );
@@ -19050,7 +19056,7 @@ L.Util.extend(GSI.KML, {
 			description : ( descr && descr != '' ? descr : null ),
 			table : null
 		};
-		
+
 		if ( layer._information.description )
 		{
 			// parse table tag
@@ -19061,7 +19067,7 @@ L.Util.extend(GSI.KML, {
 			if (table.length > 0 )
 			{
 				var tr = $(table[0] ).find( 'tr' );
-				
+
 				if ( tr.length <= 0 )
 				{
 					tr = $(table[0] ).chidlren( 'tbody' ).children( 'tr' );
@@ -19085,9 +19091,9 @@ L.Util.extend(GSI.KML, {
 			delete parser;
 			parser = null;
 		}
-		
+
 		if ( layer._information.table ) layer._information.description = null;
-		
+
 		if ( ( name && name != '' ) || ( descr && descr != '' )  )
 		{
 			layer.bindPopup( ( name && name != '' ? '<h2>' + GSI.Utils.encodeHTML(name) + '</h2>' : '' ) + ( descr && descr != '' ? descr : '' ),
@@ -19247,7 +19253,7 @@ GSI.GeoJSONTileLayer = L.TileLayer.GeoJSON.extend( {
 		if (tile.datum === null) { return null; }
 		this.addTileData(tile.datum, tilePoint);
 		if ( this._opacity != 1 )this.setOpacity( this._opacity );
-		
+
 		if ( this.geojsonLayer )
 		{
 			if ( this.options.zIndexOffset && this.geojsonLayer.setMarkerZIndex )
@@ -19335,7 +19341,7 @@ GSI.GeoJSONTileLayer = L.TileLayer.GeoJSON.extend( {
  L.LayerGroup
  ************************************************************************/
 L.LayerGroup.prototype.setMarkerZIndex = function(offset ) {
-	this._setMarkerZIndex( this, offset );	
+	this._setMarkerZIndex( this, offset );
 };
 
 L.LayerGroup.prototype._setMarkerZIndex = function( layer, offset )
@@ -19360,7 +19366,7 @@ L.LayerGroup.prototype._setMarkerZIndex = function( layer, offset )
  ************************************************************************/
 GSI.Map = L.Map.extend( {
 	_initPanes: function () {
-		
+
 		L.Map.prototype._initPanes.call( this );
 		this._panes.gsiObjectsPane = this._createPane('gsi-objects-pane');
 	},
@@ -19373,7 +19379,7 @@ GSI.Map = L.Map.extend( {
 			offset = this._getBoundsOffset(viewBounds, bounds, zoom);
 
 		var result = this.unproject(centerPoint.add(offset), zoom);
-	
+
 		return result;
 	},
 	_limitOffset: function (offset, bounds) {
@@ -19513,7 +19519,7 @@ L.Popup.prototype._updateLayout = function () {
 
 	var table = $( container ).find( "table" );
 	var tableWidth = null;
-	
+
 	if ( table.length > 0 )
 	{
 		tableWidth = table.attr( 'width' );
@@ -19521,12 +19527,12 @@ L.Popup.prototype._updateLayout = function () {
 		{
 			tableWidth = table[0].style.width;
 		}
-		
+
 	}
-	
+
 	style.width = '';
 	if ( !tableWidth) style.whiteSpace = 'nowrap';
-	
+
 	var width = container.offsetWidth;
 	width = Math.min(width, this.options.maxWidth);
 	width = Math.max(width, this.options.minWidth);
@@ -19647,7 +19653,7 @@ GSI.BaseLayer = L.TileLayer.extend({
 			    this.options.subdomains =  this.baseLayerList[idx].subdomains;
             }
 		    this.options.maxNativeZoom =  this.baseLayerList[idx].maxNativeZoom;
-		
+
 		    if ( this.baseLayerList[idx].minZoom ){
 			    this.options.minZoom =  this.baseLayerList[idx].minZoom;
             }
@@ -19801,9 +19807,9 @@ GSI.GSITMSLayer = L.TileLayer.extend({
  L.TileLayer
   - GSI.TileLayer
  ************************************************************************/
-GSI.TileLayer = L.TileLayer.extend( {	
+GSI.TileLayer = L.TileLayer.extend( {
 	initialize: function (url, options) {
-		
+
 		L.TileLayer.prototype.initialize.call(this, url, options);
 	},
 	_addTile: function (tilePoint, container) {
@@ -19847,9 +19853,9 @@ GSI.TileLayer = L.TileLayer.extend( {
 		var tileBounds = L.bounds(
 		        bounds.min.divideBy(tileSize)._floor(),
 		        bounds.max.divideBy(tileSize)._floor());
-		
+
 		this._addTilesFromCenterOut(tileBounds);
-		
+
 		if ( this.options.unloadInvisibleTiles || this.options.reuseTiles) {
 			this._removeOtherTiles(tileBounds);
 		}
@@ -19923,7 +19929,7 @@ GSI.GeoJSON = L.Class.extend( {
 					if ( iconAnchor ) options.iconAnchor = iconAnchor;
 					if ( html ) options.html = html;
 					if ( className ) options.className = className;
-					
+
 					marker = L.marker( latlng, { icon : GSI.divIcon(options) });
 					break;
 
@@ -19968,7 +19974,7 @@ GSI.GeoJSON = L.Class.extend( {
 			var iconAnchor = feature.properties[ "_iconAnchor" ];
 			var className = feature.properties[ "_className" ];
 			var scale = iconSize[0] / CONFIG.SAKUZU.SYMBOL.ICONSIZE[0];
-					
+
 			var iconOptions = {};
 			if ( iconUrl ) iconOptions.iconUrl = iconUrl;
 			if ( iconSize ) iconOptions.iconSize = iconSize;
@@ -20053,7 +20059,7 @@ GSI.GeoJSON = L.Class.extend( {
 				popupContent += table;
 			}
 		}
-		
+
 		if ( popupContent != '' )
 		{
 			layer.bindPopup( popupContent,
@@ -20066,7 +20072,7 @@ GSI.GeoJSON = L.Class.extend( {
 	{
 		this.fire( "load", { "src":this } );
 	},
-	
+
 	setMarkerZIndex : function( zIndex )
 	{
 		this.options.zIndexOffset = zIndex;
@@ -20087,10 +20093,10 @@ GSI.GeoJSON = L.Class.extend( {
 			{
 				this.layer.addData( json );
 			}
-			
+
 			if ( this.options.zIndexOffset && this.layer.setMarkerZIndex )
 				this.layer.setMarkerZIndex( this.options.zIndexOffset )
-			
+
 		}
 		catch(e){}
 	},
@@ -20241,7 +20247,7 @@ window.addEventListener('message', function(event){
         GSI.ClientMode.queryString = "";
 
         if(d.sakuzuList  != null){ GSI.ClientMode.sakuzuList  = d.sakuzuList;  }
-        if(d.queryString != null){ GSI.ClientMode.queryString = d.queryString; 
+        if(d.queryString != null){ GSI.ClientMode.queryString = d.queryString;
             if(GSI.ClientMode.queryString.indexOf("#") != -1){
                 var nPos = (GSI.ClientMode.queryString.match(new RegExp("/", "g")) || []).length;
                 if(     nPos == 0){ GSI.ClientMode.queryString = GSI.ClientMode.queryString.replace("#", "#//"); }
@@ -20314,8 +20320,8 @@ function initialize_proc()
 {
 	GSI.GLOBALS.evacManager = new GSI.EvacuationManager(GSI.GLOBALS.queryParams);
 
-	if ((GSI.GLOBALS.queryParams.params["ls"] && GSI.GLOBALS.queryParams.params["ls"].indexOf(CONFIG.layerEvacuationHeader)>=0) || 
-	        (GSI.GLOBALS.queryParams.params["lcd"] && GSI.GLOBALS.queryParams.params["lcd"].indexOf(CONFIG.layerEvacuationHeader)>=0) ) 
+	if ((GSI.GLOBALS.queryParams.params["ls"] && GSI.GLOBALS.queryParams.params["ls"].indexOf(CONFIG.layerEvacuationHeader)>=0) ||
+	        (GSI.GLOBALS.queryParams.params["lcd"] && GSI.GLOBALS.queryParams.params["lcd"].indexOf(CONFIG.layerEvacuationHeader)>=0) )
 	{
 		var cfdlg = new GSI.Modal.confirmDialog();
 		cfdlg.onPositiveButtonClick = L.bind(confirmOKClick, this, cfdlg);
@@ -20337,7 +20343,7 @@ function initialize_proc_sub()
 	var hashPosition  = L.Hash.parseHash(location.hash);
 	startUpCenter = GSI.GLOBALS.queryParams.getPosition(hashPosition && hashPosition.center ? hashPosition.center : CONFIG.DEFAULT.CENTER);
 	startUpZoom   = GSI.GLOBALS.queryParams.getZoom    (hashPosition && hashPosition.zoom   ? hashPosition.zoom   : CONFIG.DEFAULT.ZOOM  );
-	
+
 	// マップオブジェクト生成
 	GSI.GLOBALS.map = GSI.map('map',
 		{
@@ -20356,7 +20362,7 @@ function initialize_proc_sub()
 	GSI.GLOBALS.map.addLayer(vBaseBrankLayer);
 
 	GSI.GLOBALS.evacDialog = new GSI.EvacDialog();
-	
+
 	// スクロール後に正しい位置へ移動
 	GSI.GLOBALS.map.on( 'moveend', function()
     {
@@ -20397,7 +20403,7 @@ function initialize_proc_sub()
 			{
 				GSI.Utils.sendSelectedLayer(GSI.GLOBALS.layersJSON.visibleLayers[i].id);
 			}
-			
+
 		    GSI.GLOBALS.baseLayer = new GSI.BaseLayer(CONFIG.BASETILES, GSI.GLOBALS.queryParams.getBaseMap(), GSI.GLOBALS.queryParams.getBaseMapGrayScale());
 
             initialize_proc_map();
@@ -20646,7 +20652,7 @@ function initialize_proc_map()
 		top  = GSI.GLOBALS.header.getHeight() + 136;
 	}
 	GSI.GLOBALS.layerTreeDialog
-    = new GSI.LayerTreeDialog(      
+    = new GSI.LayerTreeDialog(
       GSI.GLOBALS.mapLayerList
     , GSI.GLOBALS.cocoTileLayer
     , {
@@ -20679,7 +20685,7 @@ function initialize_proc_map()
         , "#search_f"
         , "#query"
         , "#search_result"
-        , { 
+        , {
             visible : ctrlSetting.header.visible
           }
         );
@@ -20696,7 +20702,7 @@ function initialize_proc_map()
         , anchor      : CONFIG.SAKUZU.SYMBOL.ICONANCHOR
         , _iconScale  : CONFIG.SAKUZU.SYMBOL.ICON_SCALE
       }
-    , { 
+    , {
           defaultList : GSI.ClientMode.sakuzuList
       }
     );
@@ -20714,10 +20720,10 @@ function initialize_proc_map()
 	GSI.GLOBALS.header.on('topmessagechange', adjustWindow);
 	$( window ).resize(adjustWindow);
 	adjustWindow();
-	
+
 	// 初期位置設定
 	GSI.GLOBALS.map.setView(startUpCenter, startUpZoom, {reset:true});
-	
+
 	// ページの状態管理
 	GSI.GLOBALS.pageStateManager = new GSI.PageStateManager(GSI.GLOBALS.map, GSI.GLOBALS.baseLayer, GSI.GLOBALS.onoffObjects, GSI.GLOBALS.mapLayerList, GSI.GLOBALS.layerTreeDialog);
 
@@ -20728,7 +20734,7 @@ function initialize_proc_map()
             e.stopPropagation();
             e.preventDefault();
             e.dataTransfer.dropEffect = "copy";
-     }        
+     }
     , false
     );
 
@@ -20765,7 +20771,7 @@ function confirmOKClick( dlg )
 	initialize_proc_sub();
 
 	if ( GSI.GLOBALS.evacManager.isVisibleDialog() == true)
-	{	
+	{
 		GSI.GLOBALS.evacDialog.show();
 	}
 	CONFIG.layerEvacuationIsConfirmOK = true;
@@ -20811,13 +20817,13 @@ GSI.Utils.DistanceCalculator.calc = function (from, to)
 	{
 		var PI = 3.14159265358979;
 		var params = {};
-		
+
 		// ラジアンへ
 		params.phi1  = from.lat * PI / 180;
 		params.lamb1 = from.lng * PI / 180; if (params.lamb1 < 0) params.lamb1 += PI * 2;
 		params.phi2  = to.lat * PI / 180;
 		params.lamb2 = to.lng * PI / 180; if (params.lamb2 < 0) params.lamb2 += PI * 2;
-		
+
 		// 計算
 		params.lamb = params.lamb2 - params.lamb1;
 		if (params.lamb > PI) params.lamb -= PI * 2;
@@ -20829,13 +20835,13 @@ GSI.Utils.DistanceCalculator.calc = function (from, to)
 			params.seihan = 1;
 			params.lamb = Math.abs(params.lamb);
 		}
-		
+
 		// 楕円体原子 GRS80
 		var daen = 2;
 		var a = 6378137;
 		var rf = 298.257222101;
 		params.f = 1. / rf;
-		
+
 		params.a = a;
 		params.lambd = PI - params.lamb;
 		if (params.seihan == 0)
@@ -20868,31 +20874,31 @@ GSI.Utils.DistanceCalculator.calc = function (from, to)
 			zone : 0,
 			theta : null
 		};
-		
+
 		var dms2r = GSI.Utils.DistanceCalculator._dms2r;
-		
+
 		// Zoneの判断
 		if (params.c__ >= 0)
 		{
 			zoneInfo.zone = 1;
 			zoneInfo.theta = params.lamb * (params.f * params.y + 1);
 		}
-		else if (params.c__ < 0 && params.c__ >= -Math.cos(dms2r(PI,30000) * Math.cos(params.u1))) 
+		else if (params.c__ < 0 && params.c__ >= -Math.cos(dms2r(PI,30000) * Math.cos(params.u1)))
 		{
 			zoneInfo.zone = 2;
 			zoneInfo.theta = params.lambd;
 		}
-		else if (params.c__ < -Math.cos(dms2r(PI,30000) * Math.cos(params.u1))) 
+		else if (params.c__ < -Math.cos(dms2r(PI,30000) * Math.cos(params.u1)))
 		{
 			zoneInfo.zone = 3;
 			GSI.Utils.DistanceCalculator._zone3(PI, params, zoneInfo);
 		}
-		
+
 		params.theta = zoneInfo.theta;
-		
-		
+
+
 		var distance = 0;
-		if (zoneInfo.zone >= 1 && zoneInfo.zone <= 321) 
+		if (zoneInfo.zone >= 1 && zoneInfo.zone <= 321)
 		{
 			distance = GSI.Utils.DistanceCalculator._zone1(PI, params, zoneInfo);
 		}
@@ -20911,7 +20917,7 @@ GSI.Utils.DistanceCalculator.calc = function (from, to)
 	{
 		console.log(ex);
 	}
-	
+
 	return distance;
 };
 
@@ -20935,7 +20941,7 @@ GSI.Utils.DistanceCalculator._dms2r = function(PI,dms)
 GSI.Utils.DistanceCalculator._zone1 = function(PI,params, zoneInfo)
 {
 	var d__1, d__2, d__3, d__4, d__5;
-	
+
 	var zero_ = function(a){
 		if (Math.abs(a) < 1e-14) return 1e-14;
 		else return a;
@@ -21010,16 +21016,16 @@ GSI.Utils.DistanceCalculator._zone1 = function(PI,params, zoneInfo)
 		d__1 = sgamma;
 		d__2 = sgamma;
 		d__3 = params.f;
-		gg = params.f * (d__1 * d__1) * (1 - dd * 2 * rgamma) + params.f * 
+		gg = params.f * (d__1 * d__1) * (1 - dd * 2 * rgamma) + params.f *
 			zetad * (ssigma / zero_(jj)) * (1 - dd * rgamma + params.f *
 			 0.5 * (d__2 * d__2)) + d__3 * d__3 * 0.25 * zeta * zetad;
 		d__1 = 1 - gg;
 		params.theta -= ff / zero_(d__1);
 	}
-		
+
 /*     方位角の計算(zone=[1],[2,31,321]) */
 
-	if (zoneInfo.zone == 1) 
+	if (zoneInfo.zone == 1)
 	{
 		alpha = Math.atan(params.xi * Math.tan(params.theta / 2.) / zero_(params.eta));
 		dalp2 = Math.atan(params.xid * Math.tan(params.theta / 2.) / zero_(params.etad));
@@ -21043,7 +21049,7 @@ GSI.Utils.DistanceCalculator._zone1 = function(PI,params, zoneInfo)
 	}
 
 	var result = {};
-	
+
     result.alpha1 = alpha - dalp2;
 	if (zoneInfo.zone == 1)
 	{
@@ -21070,8 +21076,8 @@ GSI.Utils.DistanceCalculator._zone1 = function(PI,params, zoneInfo)
 	}
 
 	GSI.Utils.DistanceCalculator._hanten(PI,params,zoneInfo,result);
-	
-	
+
+
 /*     測地線長の計算(zone=[1],[2,31,321]) */
     d__1 = Math.sqrt(params.ep * rgamma + 1) + 1;
     n0 = params.ep * rgamma / (d__1 * d__1);
@@ -21085,8 +21091,8 @@ GSI.Utils.DistanceCalculator._zone1 = function(PI,params, zoneInfo)
     d__3 = kk;
     d__4 = rgamma;
     d__5 = zeta;
-    result.s = (1 - params.f) * params.a * aa * (ssigma - bb * jj * (zeta - 
-	    bb * .25 * (kk * (d__1 * d__1 - d__2 * d__2 * 2) - bb * 
+    result.s = (1 - params.f) * params.a * aa * (ssigma - bb * jj * (zeta -
+	    bb * .25 * (kk * (d__1 * d__1 - d__2 * d__2 * 2) - bb *
 	    0.16666666666666666 * zeta * (1 - d__3 * d__3 * 4) * (d__4 * d__4 *
 	     3 - d__5 * d__5 * 4))));
     return result.s;
@@ -21102,14 +21108,14 @@ GSI.Utils.DistanceCalculator._zone3 = function(PI, params, zoneInfo)
 	d__2 = Math.sin(params.u1);
 	d__3 = params.f;
 	d__4 = Math.sin(params.u1), d__4 *= d__4;
-	zoneInfo.rr = params.f * PI * (d__1 * d__1) * (1 - params.f * 0.25 
-		* (params.f + 1) * (d__2 * d__2) + d__3 * d__3 * 0.1875 * (d__4 * 
+	zoneInfo.rr = params.f * PI * (d__1 * d__1) * (1 - params.f * 0.25
+		* (params.f + 1) * (d__2 * d__2) + d__3 * d__3 * 0.1875 * (d__4 *
 		d__4));
 	zoneInfo.d1 = params.lambd * Math.cos(params.u1) - zoneInfo.rr;
 	zoneInfo.d2 = Math.abs(params.sigmad) + zoneInfo.rr;
 	zoneInfo.q = params.lambd / (params.f * PI);
 	zoneInfo.f1 = params.f * .25 * (params.f * .5 + 1);
-	
+
 	d__1 = zoneInfo.q;
 	zoneInfo.gamma0 = zoneInfo.q + zoneInfo.f1 * zoneInfo.q - zoneInfo.f1 * (d__1 * (d__1 * d__1));
 	if (Math.abs(params.sigma) >= 1e-14)
@@ -21132,13 +21138,13 @@ GSI.Utils.DistanceCalculator._zone31 = function(PI, params, zoneInfo)
 
 	var j, k, j1, aa0, bb0, psi, psid;
 	var psidd;
-	
-	
+
+
 	var zero_ = function(a){
 		if (Math.abs(a) < 1e-14) return 1e-14;
 		else return a;
 	};
-	
+
 	aa0 = Math.atan(zoneInfo.d1 / zero_(zoneInfo.d2));
 	d__2 = zoneInfo.d1;
 	d__3 = zoneInfo.d2;
@@ -21188,7 +21194,7 @@ GSI.Utils.DistanceCalculator._zone322 = function(PI,params, zoneInfo)
 	var d__1;
 	var n0, aa, alpha2, rgamma;
 	var result = {};
-	
+
 	result.alpha1 = PI / 2.;
 	alpha2 = PI / 2.;
 	result.alp21 = PI * 1.5;
@@ -21227,7 +21233,7 @@ GSI.Utils.DistanceCalculator._zone323 = function(PI,params, zoneInfo)
 	n = dd * rgamma / (1 - dd * rgamma);
 	w = m - n + m * n;
 	var result = {};
-	
+
 	if (w <= 0.) {
 		result.alpha1 = PI / 2.0;
 	} else {
