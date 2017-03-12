@@ -252,13 +252,13 @@ CONFIG.DIALOGPARAMETER = {
 
 // GeoJSON 独自パラメータ
 CONFIG.GEOJSONSPECIALKEYS ={
-	"_markerType": true,
+	"_markerType": false,
 
-	"_iconUrl": true,
-	"_iconSize": true,
-	"_iconAnchor": true,
-	"_html": true,
-	"_radius": true,
+	"_iconUrl": false,
+	"_iconSize": false,
+	"_iconAnchor": false,
+	"_html": false,
+	"_radius": false,
 
 	"_className": true,
 	"_stroke": true,
@@ -6685,7 +6685,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		this._fileLoadPanel = $( '<div>' ).addClass( 'gsi_sakuzu_dialog_fileloadpanel' ).hide();
 
 		var frame = $( '<div>' ).addClass( 'gsi_sakuzu_dialog_fileload' );
-
+/*
 		if ( !GSI.Utils.hasFileAPI )
 		{
 			frame.append( $('<div>').addClass( 'message' ).html( GSI.TEXT.SAKUZU.DIALOG_LOAD_COMMENT_IE8) );
@@ -6701,11 +6701,12 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		}
 		else
 		{
+*/
 			frame.append( $('<div>').addClass( 'message' ).html( GSI.TEXT.SAKUZU.DIALOG_LOAD_COMMENT ) );
 			this._fileLoadInput = $('<input>').attr( { type:"file"} );
 
 			frame.append( this._fileLoadInput );
-		}
+//		}
 
 		this._fileLoadPanel.append( frame );
 
@@ -6795,16 +6796,17 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var selectFrame = $( '<div>' ).addClass( 'selectframe' );
 		var id = 'GSI_SakuzuDialog_check' + GSI.Utils.getCurrentID() ;
 
-		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"kml"} ).addClass( 'normalcheck' );
-		var label = $( '<label>' ).attr( {'for': id} ).html( 'KML形式' );
+		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson", checked: 'checked' } ).addClass( 'normalcheck' );
+		var label = $( '<label>' ).attr( {'for': id} ).html( 'GeoJSON形式' );
 		selectFrame.append( radio );
 		selectFrame.append( label );
 
 		radio.click( L.bind( this._onSaveTypeChange, this, radio ) );
 
 		id = 'GSI_SakuzuDialog_check' + GSI.Utils.getCurrentID() ;
-		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson"} ).addClass( 'normalcheck' );
-		var label = $( '<label>' ).attr( {'for': id} ).html( 'GeoJSON形式' );
+
+		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"kml"} ).addClass( 'normalcheck' );
+		var label = $( '<label>' ).attr( {'for': id} ).html( 'KML形式' );
 		selectFrame.append( radio );
 		selectFrame.append( label );
 
@@ -7806,6 +7808,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			this, tr ) );
 		td.append( btn );
 		tr.append( td );
+
+
 
 		return tr;
 	},
@@ -17418,6 +17422,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		var iconSize = options.icon.options.iconSize;
 		var iconAnchor = options.icon.options.iconAnchor;
 		var html = options.icon.options.html;
+		/*
 		if ( options.icon.options.className == 'gsi-div-icon' )
 		{
 			result.properties[ "_markerType"] = "DivIcon";
@@ -17434,19 +17439,20 @@ GSI.SakuzuListItem = L.Class.extend( {
 		if ( ! result.properties[ "_iconSize"]  ) delete result.properties[ "_iconSize"] ;
 
 		if ( ! result.properties[ "_iconAnchor"]  ) delete result.properties[ "_iconAnchor"] ;
+		 */
 
 		if ( layer.feature &&  layer.feature.properties )
 		{
 			for ( var key in layer.feature.properties )
 			{
-				if ( CONFIG.GEOJSONSPECIALKEYS[ key ] )
-				{
+//				if ( CONFIG.GEOJSONSPECIALKEYS[ key ] )
+//				{
 					key = key.slice(1);
 					if ( !result.properties["_"+key] )
 					{
 						result.properties["_"+key] = options.icon.options[ key ];
 					}
-				}
+//				}
 			}
 		}
 
@@ -19930,6 +19936,7 @@ GSI.GeoJSON = L.Class.extend( {
 		if ( !feature.properties ) return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/080.png',iconSize:[20,20],iconAnchor:[10,10]}) });
 
 		var marker = null;
+		/*
 		if ( feature.properties[ "_markerType" ] )
 		{
 			var markerType = feature.properties[ "_markerType" ];
@@ -19982,6 +19989,7 @@ GSI.GeoJSON = L.Class.extend( {
 
 			}
 		}
+	*/
 
 		if ( !marker )
 		{
@@ -20000,6 +20008,7 @@ GSI.GeoJSON = L.Class.extend( {
 			if ( scale ) iconOptions._iconScale = scale;
 			marker = L.marker( latlng, { icon : L.icon(iconOptions) });
 		}
+
 
 		return marker;
 	},
@@ -20051,23 +20060,38 @@ GSI.GeoJSON = L.Class.extend( {
 
 		if ( feature.properties['description' ] )
 		{
-			popupContent += feature.properties['description' ];
+			popupContent += '<h2>' + feature.properties['description' ] + '</h2>';
 		}
+
+		if ( feature.properties['icon' ] )
+		{
+			popupContent += '<h2>' + feature.properties['icon' ] + '</h2>';
+		}
+
+		if ( feature.properties['info_type' ] )
+		{
+			popupContent += '<h2>' + feature.properties['info_type' ] + '</h2>';
+		}
+
 		else
 		{
+//			alert("check");
 			var table = '';
 			for( var key in feature.properties )
 			{
-				if ( !feature.properties[key] ) continue;
+//				if ( !feature.properties[key] ) continue;
+				alert(feature.properties[key]);
 
-				if ( key != "" && key != 'name' && !CONFIG.GEOJSONSPECIALKEYS[key] )
-				{
+
+//				if ( key != "" && key != 'name' && !CONFIG.GEOJSONSPECIALKEYS[key] )
+//				{
 					table +=
 						"<tr>" +
 						"<td>" + key + "</td>" +
 						"<td>" + feature.properties[key] + "</td>" +
 						"</tr>";
-				}
+//				}
+
 			}
 
 			if ( table != '' )
