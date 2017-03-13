@@ -20055,10 +20055,13 @@ GSI.GeoJSON = L.Class.extend( {
 		if ( !feature.properties ) return;
 
 		var popupContent = '';
-
+/*
 		if ( feature.properties['name' ] )
 		{
 			popupContent += '<h2>' + GSI.Utils.encodeHTML(feature.properties['name' ] ) + '</h2>';
+		}
+		else if ( feature.properties['Name' ]){
+			popupContent += '<h2>' + GSI.Utils.encodeHTML(feature.properties['Name' ] ) + '</h2>';
 		}
 
 		if ( feature.properties['description' ] )
@@ -20076,14 +20079,30 @@ GSI.GeoJSON = L.Class.extend( {
 			popupContent += '<h2>' + feature.properties['info_type' ] + '</h2>';
 		}
 
+		if ( feature.properties['id' ] )
+		{
+			popupContent += '<h2>' + feature.properties['id' ] + '</h2>';
+		}
+
+		if ( feature.properties['pic_type' ] )
+		{
+			popupContent += '<h2>' + feature.properties['pic_type' ] + '</h2>';
+		}
+
+		if ( feature.properties['movie' ] )
+		{
+			popupContent += '<h2>' + feature.properties['movie' ] + '</h2>';
+		}
+
 		else
 		{
+*/
 //			alert("check");
 			var table = '';
 			for( var key in feature.properties )
 			{
 //				if ( !feature.properties[key] ) continue;
-				alert(feature.properties[key]);
+//				alert(feature.properties[key]);
 
 
 //				if ( key != "" && key != 'name' && !CONFIG.GEOJSONSPECIALKEYS[key] )
@@ -20102,7 +20121,7 @@ GSI.GeoJSON = L.Class.extend( {
 				table = '<table>' + table + '</table>';
 				popupContent += table;
 			}
-		}
+//		}
 
 		if ( popupContent != '' )
 		{
