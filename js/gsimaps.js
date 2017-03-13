@@ -7853,6 +7853,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		this._infoTableTbody.empty();
 
+		/*
+		// 情報編集テーブルを表示させるため
 		if ( info && info.description && info.description != '' )
 		{
 			this._toggleInfoBtn.html( GSI.TEXT.SAKUZU.DIALOG_EDIT_INFOTABLE_BTN );
@@ -7861,10 +7863,11 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		}
 		else
 		{
+		*/
 			this._toggleInfoBtn.html( GSI.TEXT.SAKUZU.DIALOG_EDIT_INFOFREE_BTN );
 			this._infoFreeWordTextarea.hide();
 			this._infoTable.show();
-		}
+		//}
 		// ヘッダ
 		var tr = $( '<tr>' );
 		var td = $( '<td>' ).css( { 'width' : '30%', 'white-space':'nowrap'} ).html( '項目名' );
