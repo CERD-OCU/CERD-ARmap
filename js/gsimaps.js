@@ -28,7 +28,7 @@ CONFIG.layers = [
 	'./layers_txt/layers_20161021tottori.txt',
 	'./layers_txt/layers_20160830typhoon10.txt',
 	'./layers_txt/layers_20160820typhoon11_9.txt',
-	'./layers_txt/layers_20160414kumamoto.txt',
+//	'./layers_txt/layers_20160414kumamoto.txt',
 	'./layers_txt/layers1.txt',
 	'./layers_txt/layers2.txt',
 	'./layers_txt/layers3.txt',
@@ -334,10 +334,8 @@ if((ua.indexOf("msie") >= 0) && (vs.indexOf("msie 9") >= 0))
 CONFIG.HELPMENU = [
  {'Moji':'ヘルプ',                 'Img':'./image/help/help_icon.png',    'Link':'http://maps.gsi.go.jp/help/'},
  {'Moji':'データのご利用について', 'Img':'./image/help/use_icon.png',    'Link':'http://maps.gsi.go.jp/help/use.html'},
- {'Moji':'Twitter',                'Img':'./image/help/twitter.png',      'Link':'https://twitter.com/gsi_cyberjapan'},
- {'Moji':'GitHub',                 'Img':'./image/help/github.png',       'Link':'https://github.com/gsi-cyberjapan'},
- {'Moji':'パートナーネットワーク', 'Img':'./image/help/partner_icon.png', 'Link':'http://maps.gsi.go.jp/pn/'},
- {'Moji':'国土地理院トップ',       'Img':'./image/help/gsi_top.png',      'Link':'http://www.gsi.go.jp/'}
+ {'Moji':'GitHub',                 'Img':'./image/help/github.png',       'Link':'https://github.com/CERD-OCU/CERD-ARmap'},
+// {'Moji':'CERDトップ',       'Img':'./image/help/gsi_top.png',      'Link':'http://www.gsi.go.jp/'}
 ];
 
 /************************************************************************
@@ -2598,10 +2596,12 @@ CONFIG.SAKUZU = {
 		],
 		ICONSIZE : [20,20],
 		ICONANCHOR : [10,10],
-		DEFAULTICON : '080.png',
-		INIT_DEFAULTICON : '080.png',
-		ICON_SCALE : 1,
-		INIT_ICON_SCALE : 1
+//		DEFAULTICON : '080.png',
+//		INIT_DEFAULTICON : '080.png',
+		DEFAULTICON : '077.png',
+		INIT_DEFAULTICON : '077.png',
+		ICON_SCALE : 1.0,
+		INIT_ICON_SCALE : 1.0
 	}
 };
 
@@ -6532,7 +6532,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		// ポイント
 		btn = $( '<a>' ).attr({"href":"javascript:void(0);"}).append(
-			$('<img>').attr({'src': 'image/sakuzu/icon_mark.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDMARKER}).css( {'width' : '24px', 'height' : '24px' } )
+//			$('<img>').attr({'src': 'image/sakuzu/icon_mark.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDMARKER}).css( {'width' : '26px', 'height' : '26px' } )//
+			$('<img>').attr({'src': 'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png','title' : GSI.TEXT.SAKUZU.DIALOG_TOOLTIP_ADDMARKER}).css( {'width' : '23px', 'height' : '23px' } )
 		 ).click( L.bind( this._toolBtnClick, this, GSI.SakuzuListItem.POINT) );
 		frame.append( btn );
 
@@ -6797,7 +6798,11 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var id = 'GSI_SakuzuDialog_check' + GSI.Utils.getCurrentID() ;
 
 //		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson",  } ).val(['geojson']).addClass( 'normalcheck' );
-		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson", checked:"checked" } ).addClass( 'normalcheck' );
+		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson"} ).addClass( 'normalcheck' );
+//		radio.input.prop( {"checked": true} );
+//		radio.input.attr( {"checked": true} );
+
+
 
 		var label = $( '<label>' ).attr( {'for': id} ).html( 'GeoJSON（ARアプリ用データ形式）' );
 		selectFrame.append( radio );
@@ -15007,7 +15012,7 @@ GSI.QueryParams = L.Class.extend( {
             fBaseMap = false;
         }
 
-        this._baseMapGrayScale = false;
+        this._baseMapGrayScale = true;
 
 		if ( this.params["base"] )
 		{
@@ -19939,7 +19944,7 @@ GSI.GeoJSON = L.Class.extend( {
 	},
 	onPointToLayer : function(feature, latlng )
 	{
-		if ( !feature.properties ) return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/080.png',iconSize:[20,20],iconAnchor:[10,10]}) });
+		if ( !feature.properties ) return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/070.png',iconSize:[20,20],iconAnchor:[10,10]}) });
 
 		var marker = null;
 		/*
@@ -20033,7 +20038,7 @@ GSI.GeoJSON = L.Class.extend( {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1106.png',iconSize:[25,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_infoTag.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[27,25],iconAnchor:[10,10]}) });
 
 			}else{
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
