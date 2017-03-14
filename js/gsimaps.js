@@ -7818,6 +7818,9 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		td.append( btn );
 		tr.append( td );
 
+//		alert("iconUrl: " + layer.options.icon.options.iconUrl);
+
+
 		td = $( '<td>' ).css( { width:"24px","text-align":"center"} );
 		var btn = $( '<a>' ).attr( { 'href' : 'javascript:void(0);'} ).addClass( "btn" )
 			.html( '<img title="この下に行を追加" src="image/sakuzu/icon_enter.png">' )
@@ -7900,12 +7903,15 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		tr.append( td );
 		this._infoTableTbody.append(tr );
 
+		alert("iconUrl: " );
+
 		if ( !info || !info.table || info.table.length <= 0 )
 		{
 			var tr = this._createEditInfoTableLine(0);
 			this._infoTableTbody.append( tr );
 			return;
 		}
+
 
 		for ( var i=0; i<info.table.length; i++ )
 		{
@@ -15474,6 +15480,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 				if ( currentIconOptions.html == iconInfo.html ) return;
 				currentIconOptions.html = iconInfo.html;
 				icon = GSI.divIcon( currentIconOptions);
+
 			}
 			else
 			{
@@ -15515,6 +15522,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 					iconAnchor : iconAnchor,
 					_iconScale : iconScale
 				} );
+//				alert("iconUrl: " + iconUrl);
 			}
 		}
 
@@ -16120,7 +16128,6 @@ GSI.SakuzuListItem = L.Class.extend( {
 				iconAnchor: __myiconAnchor,
 				_iconScale : CONFIG.SAKUZU.SYMBOL.ICON_SCALE } )
 		});
-
 		path.enable();
 
 		this._editingPathList.push( path );
@@ -17450,6 +17457,7 @@ GSI.SakuzuListItem = L.Class.extend( {
 		var iconSize = options.icon.options.iconSize;
 		var iconAnchor = options.icon.options.iconAnchor;
 		var html = options.icon.options.html;
+
 		/*
 		if ( options.icon.options.className == 'gsi-div-icon' )
 		{
