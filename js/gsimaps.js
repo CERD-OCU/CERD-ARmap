@@ -16611,8 +16611,8 @@ GSI.SakuzuListItem = L.Class.extend( {
 					var value = layer.feature.properties[ key];
 
 					if ( (typeof value != "string" ) && ( typeof value != "number"  ) ) continue;
-
-					if ( key == 'name' )
+/*
+					if ( key == 'name' || key == 'Name')
 					{
 						result.title = value;
 					}
@@ -16622,9 +16622,10 @@ GSI.SakuzuListItem = L.Class.extend( {
 					}
 					else
 					{
+*/
 						if ( !result.table ) result.table = [];
 						result.table.push( { key:key,value:''+value} );
-					}
+//					}
 				}
 			}
 			else
