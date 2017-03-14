@@ -6791,13 +6791,15 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var frame = $( '<div>' ).addClass( 'gsi_sakuzu_dialog_filesave' );
 
 		frame.append( $('<div>').addClass( 'message' ).html(GSI.TEXT.SAKUZU.DIALOG_SAVE_COMMENT) );
-		frame.append( $('<div>').addClass( 'message2' ).html(GSI.TEXT.SAKUZU.DIALOG_SAVE_COMMENT2) );
+//		frame.append( $('<div>').addClass( 'message2' ).html(GSI.TEXT.SAKUZU.DIALOG_SAVE_COMMENT2) );
 
 		var selectFrame = $( '<div>' ).addClass( 'selectframe' );
 		var id = 'GSI_SakuzuDialog_check' + GSI.Utils.getCurrentID() ;
 
-		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson", checked: 'checked' } ).addClass( 'normalcheck' );
-		var label = $( '<label>' ).attr( {'for': id} ).html( 'GeoJSON形式' );
+//		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson",  } ).val(['geojson']).addClass( 'normalcheck' );
+		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"geojson", checked:"checked" } ).addClass( 'normalcheck' );
+
+		var label = $( '<label>' ).attr( {'for': id} ).html( 'GeoJSON（ARアプリ用データ形式）' );
 		selectFrame.append( radio );
 		selectFrame.append( label );
 
@@ -6806,7 +6808,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		id = 'GSI_SakuzuDialog_check' + GSI.Utils.getCurrentID() ;
 
 		var radio = $( '<input>' ).attr( { id: id, type:"radio", name:"gsi_sakuzu_dialog_savetype", value:"kml"} ).addClass( 'normalcheck' );
-		var label = $( '<label>' ).attr( {'for': id} ).html( 'KML形式' );
+		var label = $( '<label>' ).attr( {'for': id} ).html( 'KML（Google Earth用データ形式）' );
 		selectFrame.append( radio );
 		selectFrame.append( label );
 
@@ -19994,10 +19996,53 @@ GSI.GeoJSON = L.Class.extend( {
 			}
 		}
 	*/
-
+		//POIアイコン画像の設定
 		if ( !marker )
 		{
-			if ( !feature.properties[ "_iconUrl" ] ) return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/080.png',iconSize:[20,20],iconAnchor:[10,10]}) });
+			if(feature.properties[ "icon" ] == 'aed-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/aed-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'bouka-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/bouka-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'hinan-bldg-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-bldg-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'roujinhome-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/roujinhome-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'keisatu-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'medicine-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-markerMap.png',iconSize:[20,30],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'hinan-camp-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'icon_warn1.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1105.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'icon_warn0.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1102.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties[ "icon" ] == 'icon_warn4.png' || feature.properties[ "icon" ] == 'icon_warn5.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/068.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'icon_warn2.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1106.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+
+			}else if(feature.properties[ "icon" ] == 'icon_infoTag.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+
+			}else{
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
+
+			}
+
+
+			/*
+			if ( !feature.properties[ "_iconUrl" ] ) return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
 			var iconUrl = feature.properties[ "_iconUrl" ];
 			var iconSize = feature.properties[ "_iconSize" ];
 			var iconAnchor = feature.properties[ "_iconAnchor" ];
@@ -20011,6 +20056,7 @@ GSI.GeoJSON = L.Class.extend( {
 			if ( className ) iconOptions.className = className;
 			if ( scale ) iconOptions._iconScale = scale;
 			marker = L.marker( latlng, { icon : L.icon(iconOptions) });
+*/
 		}
 
 
