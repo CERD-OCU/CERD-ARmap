@@ -1,0 +1,845 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::3857"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "交番",
+        "description": "杉本町駅前の交番",
+        "icon": "keisatu-marker.png",
+        "id": "info1",
+        "info_type": "info"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.502986,
+          34.594115
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "AED",
+        "description": "学生サポートセンター内",
+        "icon": "aed-marker.png",
+        "id": "info2",
+        "info_type": "info",
+        "movie": "https://www.youtube.com/embed/E8ppjdC55O4",
+        "pic_type": "movie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505555,
+          34.591383
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "AED2",
+        "description": "学情センター内",
+        "id": "info3",
+        "info_type": "info",
+        "icon": "aed-marker.png",
+        "movie": "https://www.youtube.com/embed/E8ppjdC55O4",
+        "pic_type": "movie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505851,
+          34.592267
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "AED@JR杉本町駅",
+        "description": "AEDの使い方-私たちの勇気で救える命がある「かながわ☆スポットライト」かなチャンTV（神奈川県公式）",
+        "id": "info4",
+        "info_type": "info",
+        "icon": "aed-marker.png",
+        "movie": "https://www.youtube.com/embed/E8ppjdC55O4",
+        "pic_type": "movie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.503529,
+          34.594172
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "井戸＠守衛室裏",
+        "description": "井戸＠守衛室裏",
+        "icon": "bouka-marker.png",
+        "id": "info5",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0508.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.506598,
+          34.592323
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "井戸@第2体育館横",
+        "description": "井戸@第2体育館横",
+        "icon": "bouka-marker.png",
+        "id": "info6",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0510.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.508435,
+          34.592648
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "消火栓@杉本町公園近く",
+        "description": "消火栓@杉本町公園近く",
+        "icon": "bouka-marker.png",
+        "id": "info7",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0507.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.506588,
+          34.594491
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "防火水槽@学術情報総合センター",
+        "description": "防火水槽@学術情報総合センター",
+        "icon": "bouka-marker.png",
+        "id": "info8",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0064.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505089,
+          34.592087
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "防火水槽@学術情報総合センター",
+        "description": "防火水槽@学術情報総合センター",
+        "icon": "bouka-marker.png",
+        "id": "info8",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0068.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505349,
+          34.592547
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "プール@大阪市立依羅小学校",
+        "description": "プール@大阪市立依羅小学校",
+        "icon": "bouka-marker.png",
+        "id": "info9",
+        "info_type": "info"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.508726,
+          34.597564
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "第2体育館",
+        "description": "体育館",
+        "id": "info10",
+        "info_type": "info",
+        "icon": "hinan-camp-marker.png",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0511.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.508646,
+          34.592432
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "一時避難所@杉本町公園",
+        "description": "一時避難所@杉本町公園",
+        "id": "info11",
+        "info_type": "info",
+        "icon": "hinan-camp-marker.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.506935,
+          34.595003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "収容避難所@大阪市立依羅小学校",
+        "description": "収容避難所@大阪市立依羅小学校",
+        "id": "info12",
+        "info_type": "info",
+        "icon": "hinan-camp-marker.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.508017,
+          34.597545
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "医療法人鹿野苑河野クリニック",
+        "description": "〒558-0022 大阪府大阪市住吉区杉本２丁目２０",
+        "icon": "medicine-marker.png",
+        "id": "info15",
+        "info_type": "info"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505616,
+          34.596731
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "保険管理センター",
+        "description": "保険管理センター",
+        "icon": "medicine-marker.png",
+        "id": "info15",
+        "info_type": "info"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504319,
+          34.591397
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "保険管理センター（デモ用）",
+        "description": "保険管理センター（デモ用）",
+        "icon": "medicine-marker.png",
+        "id": "info15",
+        "info_type": "info"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505947,
+          34.591590
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "アップリケア",
+        "description": "",
+        "id": "info29",
+        "info_type": "info",
+        "icon": "roujinhome-marker.png"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.510854,
+          34.591996
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Name": "避難ビル（デモ用）",
+        "description": "避難ビル＠工学部",
+        "icon": "hinan-bldg-marker.png",
+        "id": "info37",
+        "info_type": "info",
+        "photo": "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/Sugimoto/IMG_0063.JPG",
+        "pic_type": "photo"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504880,
+          34.592609,
+          0
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn1",
+        "Name": "【通行禁止】道路閉塞",
+        "info_type": "warn",
+        "range": 10,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn4.png",
+        "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+        "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+        "description": "警告内容の解説文",
+        "risk_type": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.503799,
+          34.596339
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn2",
+        "Name": "【通行禁止】道路閉塞",
+        "info_type": "warn",
+        "range": 10,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn4.png",
+        "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+        "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+        "description": "警告内容の解説文",
+        "risk_type": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505298,
+          34.596737
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn3",
+        "Name": "【通行禁止】道路閉塞",
+        "info_type": "warn",
+        "range": 10,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn4.png",
+        "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+        "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+        "description": "警告内容の解説文",
+        "risk_type": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504735,
+          34.598125
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn4",
+        "Name": "【通行禁止】道路閉塞",
+        "info_type": "warn",
+        "range": 10,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn4.png",
+        "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+        "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+        "description": "警告内容の解説文",
+        "risk_type": 4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504317,
+          34.595603
+        ]
+      }
+    },
+     {
+        "type": "Feature",
+        "properties": {
+          "id": "warn5",
+          "Name": "【通行禁止】道路閉塞",
+          "info_type": "warn",
+          "range": 10,
+          "start": "2017/02/20 21:35",
+          "stop": "2017/11/7 23:00",
+          "icon": "icon_warn4.png",
+          "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+          "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+          "description": "警告内容の解説文",
+          "risk_type": 4
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            135.504346,
+            34.597425
+          ]
+        }
+      },
+      {
+         "type": "Feature",
+         "properties": {
+           "id": "warn6",
+           "Name": "【通行禁止】道路閉塞",
+           "info_type": "warn",
+           "range": 10,
+           "start": "2017/02/20 21:35",
+           "stop": "2017/11/7 23:00",
+           "icon": "icon_warn4.png",
+           "message1": "【通行禁止】家やブロック塀が崩れているエリアに近づいています！通行はできません！",
+           "message2": "【通行禁止】家やブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+           "description": "警告内容の解説文",
+           "risk_type": 4
+         },
+         "geometry": {
+           "type": "Point",
+           "coordinates": [
+             135.505555,
+             34.597462
+           ]
+         }
+       },
+       {
+          "type": "Feature",
+          "properties": {
+            "id": "warn6",
+            "Name": "【通行禁止】道路閉塞",
+            "info_type": "warn",
+            "range": 10,
+            "start": "2017/02/20 21:35",
+            "stop": "2017/11/7 23:00",
+            "icon": "icon_warn5.png",
+            "message1": "【通行禁止】ブロック塀が崩れているエリアに近づいています！通行はできません！",
+            "message2": "【通行禁止】ブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+            "description": "理学部裏のブロック塀が崩壊",
+            "risk_type": 5
+          },
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              135.506442,
+              34.592715
+            ]
+          }
+        },
+        {
+           "type": "Feature",
+           "properties": {
+             "id": "warn6",
+             "Name": "【通行禁止】道路閉塞",
+             "info_type": "warn",
+             "range": 10,
+             "start": "2017/02/20 21:35",
+             "stop": "2017/11/7 23:00",
+             "icon": "icon_warn5.png",
+             "message1": "【通行禁止】ブロック塀が崩れているエリアに近づいています！通行はできません！",
+             "message2": "【通行禁止】ブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+             "description": "理学部裏のブロック塀が崩壊",
+             "risk_type": 5
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [
+               135.506446,
+               34.592862
+             ]
+           }
+         },
+        {
+           "type": "Feature",
+           "properties": {
+             "id": "warn6",
+             "Name": "【通行禁止】道路閉塞",
+             "info_type": "warn",
+             "range": 10,
+             "start": "2017/02/20 21:35",
+             "stop": "2017/11/7 23:00",
+             "icon": "icon_warn5.png",
+             "message1": "【通行禁止】ブロック塀が崩れているエリアに近づいています！通行はできません！",
+             "message2": "【通行禁止】ブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+             "description": "理学部裏のブロック塀が崩壊",
+             "risk_type": 5
+           },
+           "geometry": {
+             "type": "Point",
+             "coordinates": [
+               135.506464,
+               34.593033
+             ]
+           }
+         },
+         {
+            "type": "Feature",
+            "properties": {
+              "id": "warn6",
+              "Name": "【通行禁止】道路閉塞",
+              "info_type": "warn",
+              "range": 10,
+              "start": "2017/02/20 21:35",
+              "stop": "2017/11/7 23:00",
+              "icon": "icon_warn5.png",
+              "message1": "【通行禁止】ブロック塀が崩れているエリアに近づいています！通行はできません！",
+              "message2": "【通行禁止】ブロック塀が崩れているエリアに侵入しました！危険です！ただちにエリアから離れてください！",
+              "description": "理学部裏のブロック塀が崩壊",
+              "risk_type": 5
+            },
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                135.506470,
+                34.593156
+              ]
+            }
+          },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn7",
+        "Name": "【通行禁止】道路閉塞（落橋）",
+        "info_type": "warn",
+        "range": 20,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:30",
+        "icon": "icon_warn3.png",
+        "message1": "【通行禁止】橋が落橋したエリアに近づいています！注意してください！",
+        "message2": "【通行禁止】橋が落橋したエリアに入りました！危険です！ただちにエリアから離れてください！",
+        "description": "セブンイレブン前",
+        "risk_type": 3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504079,
+          34.598361
+        ]
+      }
+    },
+         {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf1",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 45,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.505934,
+          34.596365
+        ]
+      }
+    },
+       {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf2",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 35,
+        "start": "2017/02/20 21:43",
+        "stop": "2017/11/7 23:00",
+     "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.506405,
+          34.596350
+        ]
+      }
+    },
+      {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf3",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 33,
+        "start": "2017/02/20 21:50",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.506800,
+          34.596358
+        ]
+      }
+    },
+      {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf4",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 25,
+        "start": "2017/02/20 21:57",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.507153,
+          34.596310
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf5",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 20,
+        "start": "2017/02/20 22:02",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.507392,
+          34.596318
+        ]
+      }
+    },
+
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warnf6",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 15,
+        "start": "2017/02/20 22:06",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.507555,
+          34.596317
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warnfa1",
+        "Name": "【通行禁止】火災発生",
+        "info_type": "warn",
+        "range": 30,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn0.png",
+        "message1": "【通行禁止】近くで火事がおきています！注意してください！",
+        "message2": "【通行禁止】火事のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "木造住宅街で火災発生",
+        "risk_type": 0
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.504814,
+          34.595980
+        ]
+      }
+    },
+              {
+      "type": "Feature",
+      "properties": {
+        "id": "warn14",
+        "Name": "【通行禁止】浸水災害",
+        "info_type": "warn",
+        "range": 100,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn1.png",
+        "message1": "【通行注意】近くで浸水しています！注意してください！",
+        "message2": "【通行注意】浸水のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "大和川で浸水災害",
+        "risk_type": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.510590,
+          34.589786
+        ]
+      }
+    },
+      {
+      "type": "Feature",
+      "properties": {
+        "id": "warn13",
+        "Name": "【通行禁止】土砂崩れ災害",
+        "info_type": "warn",
+        "range": 65,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn2.png",
+        "message1": "【通行注意】近くで土砂崩れが発生しています！注意してください！",
+        "message2": "【通行注意】土砂崩れのエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "浅香中央公園で土砂崩れ災害",
+        "risk_type": 2
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.509759,
+          34.591149
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn13",
+        "Name": "【通行禁止】浸水災害",
+        "info_type": "warn",
+        "range": 65,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn1.png",
+        "message1": "【通行注意】近くで浸水しています！注意してください！",
+        "message2": "【通行注意】浸水のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "大和川で浸水災害",
+        "risk_type": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.508418,
+          34.588955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "warn14",
+        "Name": "【通行禁止】浸水災害",
+        "info_type": "warn",
+        "range": 100,
+        "start": "2017/02/20 21:35",
+        "stop": "2017/11/7 23:00",
+        "icon": "icon_warn1.png",
+        "message1": "【通行注意】近くで浸水しています！注意してください！",
+        "message2": "【通行注意】浸水のエリアに入りました！ただちに，安全なエリアに移動してください！",
+        "description": "大和川で浸水災害",
+        "risk_type": 1
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          135.510590,
+          34.589786
+        ]
+      }
+    }
+     ]
+}
