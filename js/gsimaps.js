@@ -2557,6 +2557,7 @@ GSI.MUNI_ARRAY["47382"] = '47,沖縄県,47382,与那国町';
 CONFIG.SAKUZU = {
 
 	SYMBOL : {
+/*
 		URL: "http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/",
 		FILES:[
 			'001.png', '002.png', '003.png', '004.png', '005.png', '006.png', '007.png', '008.png', '009.png', '010.png',
@@ -2602,6 +2603,22 @@ CONFIG.SAKUZU = {
 		INIT_DEFAULTICON : '077.png',
 		ICON_SCALE : 1.0,
 		INIT_ICON_SCALE : 1.0
+		*/
+
+		URL: "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/",
+		FILES:[
+			'aed-markerMap.png', 'hinan-bldg-markerMap.png', 'hinan-camp-marker.png', 'keisatu-markerMap.png', 'roujinhome-markerMap.png',
+			'bouka-markerMap.png', 'hinan-camp-markerMap.png', 'icon_infoTag.png', 'medicine-markerMap.png', 'shoubo-markerMap.png',
+			'077.png', '068.png','1102.png', '1105.png', '1106.png'
+		],
+		ICONSIZE : [20,20],
+		ICONANCHOR : [10,10],
+		DEFAULTICON : 'icon_infoTag.png',
+		INIT_DEFAULTICON : 'icon_infoTag.png',
+		ICON_SCALE : 1.0,
+		INIT_ICON_SCALE : 1.0
+
+
 	}
 };
 
@@ -7109,7 +7126,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var table = $( '<table>' );
 		var tbody = $( '<tbody>' );
 
-		this._pointIconImage = $( '<img>');
+		this._pointIconImage = $( '<img width=40 heigh=40>');
 
 		var tr = $( '<tr>' );
 		tr.append( $( '<td>' ).css( {'white-space':'nowrap'} ).html( 'アイコン:' ) );
