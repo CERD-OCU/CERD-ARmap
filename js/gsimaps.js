@@ -7571,9 +7571,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var tr = $( '<tr>' );
 
 		tr.append( $( '<td>' ).css( { 'white-space':'nowrap'} ).html('名称:') );
-		var td = $( '<td>' );
-
-		this._titleInput = $( '<input>' ).addClass( 'inputtext').attr({'type':'text', 'placeholder':'(例: 火災1)'}).css( { width:'300px'} );
+		var td = $( '<td></td>' );
+		this._titleInput = $( '<input>' ).addClass( 'inputtext').attr({'type':'text', 'placeholder':'nameタグ (例：火災1)'}).css( { width:'300px'} );
 		td.append( this._titleInput );
 		tr.append( td );
 
