@@ -7131,6 +7131,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		var tr = $( '<tr>' );
 		tr.append( $( '<td>' ).css( {'white-space':'nowrap'} ).html( 'アイコン:' ) );
 		tr.append( $( '<td>' ).append( this._pointIconImage ) );
+/*
 		tr.append( $( '<td>' ).css( {'white-space':'nowrap'} ).html( '&nbsp;&nbsp;拡大率:' ) );
 
 		this._pointIconSizeSelect = $( '<select>' );
@@ -7139,10 +7140,11 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		this._pointIconSizeSelect.append( $( '<option>' ).html("1.5").val("1.5" ) );
 		this._pointIconSizeSelect.append( $( '<option>' ).html("2.0").val("2.0" ) );
 
-		this._pointIconSizeSelect[0].selectedIndex = 3;
+		this._pointIconSizeSelect[0].selectedIndex = 0;
 		this._pointIconSizeSelect.on( 'change',  L.bind( this._onPointIconSizeChange, this ) );
 
 		tr.append( $( '<td>' ).append( this._pointIconSizeSelect ) );
+*/
 
 		tbody.append( tr );
 		table.append( tbody );
@@ -7202,9 +7204,10 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	},
 	_refreshEditingIcon : function( selectedIcon )
 	{
-		var iconScale = parseFloat( this._pointIconSizeSelect.val() );
+//		var iconScale = parseFloat( this._pointIconSizeSelect.val() );
 		var iconSize = null;
 		var iconAnchor = null;
+		iconScale = 1.0;
 
 		if ( selectedIcon )
 		{
@@ -7225,6 +7228,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			_iconScale: iconScale
 		};
 		this._refreshEditing( { _iconInfo: iconInfo });
+
 		if( iconInfo.iconUrl != null )
 		{
 			GSI.GLOBALS.sakuzuList._defaultIcon.url = iconInfo.iconUrl;
@@ -7237,6 +7241,76 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 				CONFIG.SAKUZU.SYMBOL.DEFAULTICON = sFileName;
 			}
 		}
+/*
+		function(tr){
+			var no = 0;
+			var trList = this._infoTableTbody.find( 'tr' );
+			for ( var i=0; i<trList.length; i++ )
+			{
+				if ( trList[i] == tr[0] )
+				{
+					no = i;
+					break;
+				}
+			}
+			if ( no == 1 && trList.length <= 2 )
+			{
+				tr.find( 'textarea' ).val("" );
+			}
+			else
+			{
+				tr.fadeOut( 'fast', function(){
+					$(this).remove();
+				} );
+			}
+		}
+	*/
+
+//		alert("tbody: " + tbody);
+//		var texta = $('#test tr').find('textarea');
+//		alert("texta: " + texta);
+//		console.log(texta);
+
+//		var tr = parentNode.parentNode;
+//		this._infoTableTbody.find("tr:gt(1)").remove();
+//		    $(this).html( $(this).html().replace("icon","") );
+//		var icon_line = tbody.deleteRow(0);
+
+//		icon_line = new JKL.Dumper().dump(icon_line)
+//		alert("icon_line: " + icon_line);
+	//	this._infoTableTbody.removeChild('tr');
+
+//		var cel = $('#test tr').parent().children().eq(1).text();
+//		console.log(cel);
+
+		var table = document.getElementById("test");
+		var rows  = table.rows.length; //行数
+		var cols = table.rows[0].cells.length; // 列数
+
+		var value = table.rows[1].cells[0].innerText;
+
+
+		// 項目行の次の行を削除
+		$('#test tr').eq(1).remove();
+
+//		console.log(tbody);
+		console.log(this._pointIconSelector.selectedIcon.url);
+
+		var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
+		var iconPos = iconUrlText.lastIndexOf( "/" );
+			if( iconPos != -1 )
+			{
+				var selectedIconName = iconUrlText.substr( iconPos + 1 );
+				selectedIconName =selectedIconName.replace('"','');
+			}
+
+		var tr = this._createEditInfoTableLine(0, "icon", selectedIconName);
+		this._infoTableTbody.append( tr );
+
+		//新規追加した行（tr）を，項目行の下に移動
+		$('#test tr:last').insertBefore($('#test tr').eq(0).next());
+
+
 	},
 	_refreshEditingIconHTML : function( html )
 	{
@@ -7249,7 +7323,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	_onPointIconSizeChange : function()
 	{
 		var selectedIcon = this._pointIconSelector.selectedIcon;
-		CONFIG.SAKUZU.SYMBOL.ICON_SCALE = parseFloat( this._pointIconSizeSelect.val() );
+//		CONFIG.SAKUZU.SYMBOL.ICON_SCALE = parseFloat( this._pointIconSizeSelect.val() );
 		this._refreshEditingIcon( selectedIcon );
 	},
 	_onPointIconSelect : function(event)
@@ -7532,7 +7606,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		//frame.append( this._toggleInfoBtn );
 
-		this._infoTable = $( '<table>' ).attr({border:0}).css( { width:'100%'} );
+		this._infoTable = $( '<table id=test>' ).attr({border:0}).css( { width:'100%'} );
 		var tbody = $( '<tbody>' );
 
 		this._infoTableTbody = tbody;
@@ -7700,7 +7774,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			{
 				this._pointIconImage.attr( { src: style.icon.options.iconUrl } );
 				this._pointIconSelector.setSelectedIcon(  style.icon.options.iconUrl );
-				this._pointIconSizeSelect.val( parseFloat( style.icon.options._iconScale ).toFixed(1) );
+//				this._pointIconSizeSelect.val( parseFloat( style.icon.options._iconScale ).toFixed(1) );
 				this._pointEditTextFrame.hide();
 				this._pointEditMarkerFrame.show();
 			}
@@ -7818,7 +7892,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		td.append( btn );
 		tr.append( td );
 
-//		alert("iconUrl: " + layer.options.icon.options.iconUrl);
+//		alert("_createEditInfoTableLine: " );
 
 
 		td = $( '<td>' ).css( { width:"24px","text-align":"center"} );
@@ -7826,7 +7900,6 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			.html( '<img title="この下に行を追加" src="image/sakuzu/icon_enter.png">' )
 			.click( L.bind(
 				function(tr){
-
 					var insertTr = this._createEditInfoTableLine( 0, "","" );
 					insertTr.hide();
 					insertTr.insertAfter( tr );
@@ -7903,22 +7976,42 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		tr.append( td );
 		this._infoTableTbody.append(tr );
 
-		alert("iconUrl: " );
+		console.log(this._pointIconSelector.selectedIcon.url);
+		var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
+		var iconPos = iconUrlText.lastIndexOf( "/" );
+			if( iconPos != -1 )
+			{
+				var selectedIconName = iconUrlText.substr( iconPos + 1 );
+				selectedIconName =selectedIconName.replace('"','');
+			}
+
 
 		if ( !info || !info.table || info.table.length <= 0 )
 		{
-			var tr = this._createEditInfoTableLine(0);
+			//アイコン選択した後に，値を挿入する
+			var tr = this._createEditInfoTableLine(0, "icon", selectedIconName);
+			this._infoTableTbody.append( tr );
+
+			var tr = this._createEditInfoTableLine(1, "", "");
 			this._infoTableTbody.append( tr );
 			return;
 		}
 
 
-		for ( var i=0; i<info.table.length; i++ )
+		for ( var i=1; i<info.table.length; i++ )
 		{
 			var item = info.table[i];
 
-			var tr = this._createEditInfoTableLine(i,item.key, item.value);
-			this._infoTableTbody.append( tr );
+			if (item.key == 'icon') {
+				var tr = this._createEditInfoTableLine(i,item.key, item.value);
+				this._infoTableTbody.append( tr );
+				$('#test tr:last').insertBefore($('#test tr').eq(0).next());
+
+			}else{
+
+				var tr = this._createEditInfoTableLine(i,item.key, item.value);
+				this._infoTableTbody.append( tr );
+			}
 		}
 	},
 	_onSakuzuItemReady : function()
@@ -7946,6 +8039,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	},
 	_refreshEditing : function( style )
 	{
+//		console.log(this._pointIconSelector.selectedIcon.url);
 		this._editingTarget.setEditingStyle(style);
 	},
 	_showFileLoadPanel : function()
@@ -20051,22 +20145,22 @@ GSI.GeoJSON = L.Class.extend( {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn1.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1105.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1105.png',iconSize:[25,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn0.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1102.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1102.png',iconSize:[25,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties[ "icon" ] == 'icon_warn4.png' || feature.properties[ "icon" ] == 'icon_warn5.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/068.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/068.png',iconSize:[25,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn2.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/1106.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1106.png',iconSize:[25,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_infoTag.png' ) {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[27,25],iconAnchor:[10,10]}) });
 
 			}else{
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'http://cyberjapandata.gsi.go.jp/portal/sys/v4/symbols/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
 
 			}
 
