@@ -6927,7 +6927,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			contentType = "application/json";
 		}
 
-		var fileName = 'gsi' + GSI.Utils.getTimeStampString() + ext;
+//		var fileName = 'gsi' + GSI.Utils.getTimeStampString() + ext;
+		var fileName = 'data' + ext;
 		var blob = new Blob([this._fileSaveTextarea.val()], { "type" : contentType});
 
 		if ( window.navigator.msSaveOrOpenBlob )
