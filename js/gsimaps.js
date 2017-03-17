@@ -7006,6 +7006,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		return frame;
 	},
+	// check
 	_makeEditInfo : function()
 	{
 		var result = {
@@ -7283,19 +7284,18 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 //		var cel = $('#test tr').parent().children().eq(1).text();
 //		console.log(cel);
-
-		var table = document.getElementById("test");
+/*
+		var table = document.getElementById("tbl_check");
 		var rows  = table.rows.length; //行数
 		var cols = table.rows[0].cells.length; // 列数
-
 		var value = table.rows[1].cells[0].innerText;
-
+*/
 
 		// 項目行の次の行を削除
-		$('#test tr').eq(1).remove();
+//		$('#test tr').eq(1).remove();
 
 //		console.log(tbody);
-		console.log(this._pointIconSelector.selectedIcon.url);
+//		console.log(this._pointIconSelector.selectedIcon.url);
 
 		var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
 		var iconPos = iconUrlText.lastIndexOf( "/" );
@@ -7309,7 +7309,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		this._infoTableTbody.append( tr );
 
 		//新規追加した行（tr）を，項目行の下に移動
-		$('#test tr:last').insertBefore($('#test tr').eq(0).next());
+		$('#tbl_check tr:last').insertBefore($('#tbl_check tr').eq(0).next());
 
 
 	},
@@ -7329,6 +7329,8 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	},
 	_onPointIconSelect : function(event)
 	{
+		// 項目行の次の行を削除
+		$('#tbl_check tr').eq(1).remove();
 		this._refreshEditingIcon( event.selectedIcon );
 	},
 	_createLineEditFrame : function()
@@ -7566,12 +7568,13 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	_createInfoEditFrame : function()
 	{
 		var frame = $( '<div>' ).addClass( 'gsi_sakuzu_dialog_infoedit' );
-		var table = $( '<table>' ).css( { width:'100%'} );
+		var table = $( '<table id=head>' ).css( { width:'100%'} );
 		var tbody = $( '<tbody>' );
 		var tr = $( '<tr>' );
 
 		tr.append( $( '<td>' ).css( { 'white-space':'nowrap'} ).html('名称:') );
-		var td = $( '<td></td>' );
+		var td = $( '<td>' );
+
 		this._titleInput = $( '<input>' ).addClass( 'inputtext').attr({'type':'text', 'placeholder':'nameタグ (例：火災1)'}).css( { width:'300px'} );
 		td.append( this._titleInput );
 		tr.append( td );
@@ -7606,7 +7609,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 
 		//frame.append( this._toggleInfoBtn );
 
-		this._infoTable = $( '<table id=test>' ).attr({border:0}).css( { width:'100%'} );
+		this._infoTable = $( '<table id=tbl_check>' ).attr({border:0}).css( { width:'100%'} );
 		var tbody = $( '<tbody>' );
 
 		this._infoTableTbody = tbody;
@@ -7941,6 +7944,9 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	},
 	_initEditInfo : function( info )
 	{
+
+//		console.log(info.title);
+		/*
 		if ( info && info.title )
 			this._titleInput.val(info.title);
 		else
@@ -7950,6 +7956,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			this._infoFreeWordTextarea.val(info.description);
 		else
 			this._infoFreeWordTextarea.val( '' );
+		 */
 
 		this._infoTableTbody.empty();
 
@@ -7976,7 +7983,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		tr.append( td );
 		this._infoTableTbody.append(tr );
 
-		console.log(this._pointIconSelector.selectedIcon.url);
+//		console.log(this._pointIconSelector.selectedIcon.url);
 		var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
 		var iconPos = iconUrlText.lastIndexOf( "/" );
 			if( iconPos != -1 )
@@ -7998,17 +8005,25 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		}
 
 
-		for ( var i=1; i<info.table.length; i++ )
+		for ( var i=0; i<info.table.length; i++ )
 		{
 			var item = info.table[i];
 
+			//keyがiconだった場合，項目行の下に挿入する
 			if (item.key == 'icon') {
 				var tr = this._createEditInfoTableLine(i,item.key, item.value);
 				this._infoTableTbody.append( tr );
-				$('#test tr:last').insertBefore($('#test tr').eq(0).next());
+				$('#tbl_check tr:last').insertBefore($('#tbl_check tr').eq(0).next());
+
+			}else if (item.key == 'name') {
+				var tr = this._createEditInfoTableLine(i,item.key, item.value);
+				this._infoTableTbody.append( tr );
+
+			}else if (item.key == 'Name'){
+				var tr = this._createEditInfoTableLine(i,'name', item.value);
+				this._infoTableTbody.append( tr );
 
 			}else{
-
 				var tr = this._createEditInfoTableLine(i,item.key, item.value);
 				this._infoTableTbody.append( tr );
 			}
