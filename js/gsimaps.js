@@ -2607,8 +2607,8 @@ CONFIG.SAKUZU = {
 
 		URL: "https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/",
 		FILES:[
-			'aed-markerMap.png', 'hinan-bldg-markerMap.png', 'hinan-camp-marker.png', 'keisatu-markerMap.png', 'roujinhome-markerMap.png',
-			'bouka-markerMap.png', 'hinan-camp-markerMap.png', 'icon_infoTag.png', 'medicine-markerMap.png', 'shoubo-markerMap.png',
+			'aed-marker.png', 'hinan-bldg-marker.png', 'hinan-camp-marker.png', 'keisatu-marker.png', 'roujinhome-marker.png',
+			'bouka-marker.png', 'hinan-camp-marker.png', 'icon_infoTag.png', 'medicine-marker.png', 'shoubo-marker.png',
 			'077.png', '068.png','1102.png', '1105.png', '1106.png'
 		],
 		ICONSIZE : [20,20],
@@ -20139,25 +20139,25 @@ GSI.GeoJSON = L.Class.extend( {
 		if ( !marker )
 		{
 			if(feature.properties[ "icon" ] == 'aed-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/aed-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/aed-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'bouka-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/bouka-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/bouka-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'hinan-bldg-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-bldg-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-bldg-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'roujinhome-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/roujinhome-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/roujinhome-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'keisatu-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'medicine-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-markerMap.png',iconSize:[20,30],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-marker.png',iconSize:[20,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'hinan-camp-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-markerMap.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn1.png' ) {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1105.png',iconSize:[25,25],iconAnchor:[10,10]}) });
