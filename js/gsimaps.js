@@ -7957,7 +7957,9 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		else
 			this._infoFreeWordTextarea.val( '' );
 		 */
-
+		
+		// アイコンのタイトル（name/Name）を非表示 
+		document.getElementById('head').style.display='none';
 		this._infoTableTbody.empty();
 
 		/*
@@ -7974,6 +7976,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			this._toggleInfoBtn.html( GSI.TEXT.SAKUZU.DIALOG_EDIT_INFOFREE_BTN );
 			this._infoFreeWordTextarea.hide();
 			this._infoTable.show();
+
 		//}
 		// ヘッダ
 		var tr = $( '<tr>' );
