@@ -2609,9 +2609,9 @@ CONFIG.SAKUZU = {
 		FILES:[
 			'aed-marker.png', 'hinan-bldg-marker.png', 'hinan-camp-marker.png', 'keisatu-marker.png', 'roujinhome-marker.png',
 			'bouka-marker.png', 'hinan-camp-marker.png', 'icon_infoTag.png', 'medicine-marker.png', 'shoubo-marker.png',
-			'077.png', '068.png','1102.png', '1105.png', '1106.png'
+			'077.png', 'icon_warn0.png','icon_warn1.png', 'icon_warn2.png', 'icon_warn3.png'
 		],
-		ICONSIZE : [20,20],
+		ICONSIZE : [30,30],
 		ICONANCHOR : [10,10],
 		DEFAULTICON : 'icon_infoTag.png',
 		INIT_DEFAULTICON : 'icon_infoTag.png',
@@ -20200,43 +20200,43 @@ GSI.GeoJSON = L.Class.extend( {
 		if ( !marker )
 		{
 			if(feature.properties[ "icon" ] == 'aed-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/aed-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/aed-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'bouka-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/bouka-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/bouka-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'hinan-bldg-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-bldg-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-bldg-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'roujinhome-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/roujinhome-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/roujinhome-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'keisatu-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'medicine-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-marker.png',iconSize:[20,30],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-marker.png',iconSize:[25,35],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'hinan-camp-marker.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-marker.png',iconSize:[20,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/hinan-camp-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn1.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1105.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn1.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn0.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1102.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn0.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
-			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties[ "icon" ] == 'icon_warn4.png' || feature.properties[ "icon" ] == 'icon_warn5.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/068.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties["icon"] == 'icon_warn4.png' || feature.properties["icon"] == 'icon_warn5.png') {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn3.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn2.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/1106.png',iconSize:[25,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn2.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_infoTag.png' ) {
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[27,25],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_infoTag.png',iconSize:[30,27],iconAnchor:[10,10]}) });
 
 			}else{
-				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/077.png',iconSize:[20,20],iconAnchor:[10,10]}) });
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/077.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
 			}
 
