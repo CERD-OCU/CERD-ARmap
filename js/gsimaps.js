@@ -7314,53 +7314,6 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		//新規追加した行（tr）を，項目行の下に移動
 		$('#tbl_check tr:last').insertBefore($('#tbl_check tr').eq(0).next());
 
-		/*
-		//災害タグの場合
-		if (selectedIconName == '068.png' || selectedIconName == '1102.png' || selectedIconName == '1105.png' || selectedIconName == '1106.png' ){
-
-			this._initEditInfo( this._editingTarget.getEditingInfo() );
-
-			var tr = this._createEditInfoTableLine(0, "icon", selectedIconName);
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(1, "id", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(2, "name", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(3, "description", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(4, "info_type", "warn");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(5, "risk_type", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(6, "start", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(7, "stop", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(8, "range", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(9, "message1", "");
-			this._infoTableTbody.append( tr );
-
-			var tr = this._createEditInfoTableLine(10, "message2", "");
-			this._infoTableTbody.append( tr );
-
-		//情報タグの場合
-		} else {
-
-			this._initEditInfo( this._editingTarget.getEditingInfo() );
-
-		}
-*/
-
 	},
 	_refreshEditingIconHTML : function( html )
 	{
@@ -7994,8 +7947,9 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	_initEditInfo : function( info )
 	{
 
-//		console.log(info.title);
-		/*
+		console.log(info.title);
+
+
 		if ( info && info.title )
 			this._titleInput.val(info.title);
 		else
@@ -8005,28 +7959,27 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 			this._infoFreeWordTextarea.val(info.description);
 		else
 			this._infoFreeWordTextarea.val( '' );
-		 */
 
-		// アイコンのタイトル（name/Name）を非表示
-		document.getElementById('head').style.display='none';
 		this._infoTableTbody.empty();
 
-		/*
 		// 情報編集テーブルを表示させるため
 		if ( info && info.description && info.description != '' )
 		{
+			//alert("check1");
 			this._toggleInfoBtn.html( GSI.TEXT.SAKUZU.DIALOG_EDIT_INFOTABLE_BTN );
 			this._infoTable.hide();
 			this._infoFreeWordTextarea.show();
 		}
 		else
 		{
-		*/
+			//alert("check2");
 			this._toggleInfoBtn.html( GSI.TEXT.SAKUZU.DIALOG_EDIT_INFOFREE_BTN );
 			this._infoFreeWordTextarea.hide();
 			this._infoTable.show();
+			// アイコンのタイトル（name/Name）を非表示
+			document.getElementById('head').style.display='none';
 
-		//}
+		}
 		// ヘッダ
 		var tr = $( '<tr>' );
 		var td = $( '<td>' ).css( { 'width' : '30%', 'white-space':'nowrap'} ).html( '項目名' );
@@ -8036,17 +7989,24 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		this._infoTableTbody.append(tr );
 
 //		console.log(this._pointIconSelector.selectedIcon.url);
-		var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
-		var iconPos = iconUrlText.lastIndexOf( "/" );
-			if( iconPos != -1 )
-			{
-				var selectedIconName = iconUrlText.substr( iconPos + 1 );
-				selectedIconName =selectedIconName.replace('"','');
-			}
+		if (this._pointIconSelector.selectedIcon != null) {
+			var iconUrlText = new JKL.Dumper().dump(this._pointIconSelector.selectedIcon.url)
+			var iconPos = iconUrlText.lastIndexOf( "/" );
+				if( iconPos != -1 )
+				{
+					var selectedIconName = iconUrlText.substr( iconPos + 1 );
+					selectedIconName =selectedIconName.replace('"','');
+				}
+		} else {
+				var selectedIconName = "077.png";
+
+		}
+
 
 		//タグ情報の新規追加画面
 		if ( !info || !info.table || info.table.length <= 0 )
 		{
+			//alert("check3");
 			var tr = this._createEditInfoTableLine(0, "icon", selectedIconName);
 			this._infoTableTbody.append( tr );
 
@@ -8069,6 +8029,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 		for ( var i=0; i<info.table.length; i++ )
 		{
 			var item = info.table[i];
+			//alert("check4");
 
 			//keyがiconだった場合，項目行の下に挿入する
 			if (item.key == 'icon') {
@@ -8115,7 +8076,7 @@ GSI.SakuzuDialog = GSI.Dialog.extend( {
 	},
 	_refreshEditing : function( style )
 	{
-//		console.log(this._pointIconSelector.selectedIcon.url);
+		console.log(this._pointIconSelector.selectedIcon.url);
 		this._editingTarget.setEditingStyle(style);
 	},
 	_showFileLoadPanel : function()
