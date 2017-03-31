@@ -17386,7 +17386,6 @@ GSI.SakuzuListItem = L.Class.extend( {
 				case GSI.SakuzuListItem.POINT_TEXT:
 				case GSI.SakuzuListItem.MULTIPOINT:
 					geoJSONData = this._makeGeoJSONPoint( layer);
-					console.log(geoJSONData) ;
 					if ( geoJSONData ) features.push( geoJSONData );
 					break;
 
@@ -17614,25 +17613,10 @@ GSI.SakuzuListItem = L.Class.extend( {
 			{
 //				if ( CONFIG.GEOJSONSPECIALKEYS[ key ] )
 //				{
-//				console.log( key );
-//				if (result.properties[ key ] == result.properties[ "range"]){
-				if (key == "range"){
-
-//					var newText = result.properties[ key ];
-//					newText = newText.replace(/¥"/g,"");
-//					alert("key: " + newText);
-//					console.log(newText);
-//					alert("key: " + result.properties[ key ]);
-//					console.log(result.properties[ key ]);
-
-				}
 					key = key.slice(1);
-//
-
 					if ( !result.properties["_"+key] )
 					{
 						result.properties["_"+key] = options.icon.options[ key ];
-						//console.log(options.icon.options[ key ]);
 					}
 //				}
 			}
@@ -17992,6 +17976,7 @@ GSI.SakuzuList = L.Class.extend( {
 
 				for ( var j=0; j<features.length; j++ )
 				{
+					// range と risk_typeの値を数値として扱う修正
 					if ( features[j].properties["range"] ){
 						var range_num = features[j].properties["range"] ;
 						range_num = Number(range_num);
