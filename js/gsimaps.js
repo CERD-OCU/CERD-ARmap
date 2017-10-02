@@ -20188,6 +20188,9 @@ GSI.GeoJSON = L.Class.extend( {
 			}else if(feature.properties[ "icon" ] == 'keisatu-marker.png' ) {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/keisatu-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
 
+			}else if(feature.properties[ "icon" ] == 'shoubo-marker.png' ) {
+				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/shoubo-marker.png',iconSize:[25,30],iconAnchor:[10,10]}) });
+
 			}else if(feature.properties[ "icon" ] == 'medicine-marker.png' ) {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/medicine-marker.png',iconSize:[25,35],iconAnchor:[10,10]}) });
 
@@ -20200,7 +20203,7 @@ GSI.GeoJSON = L.Class.extend( {
 			}else if(feature.properties[ "icon" ] == 'icon_warn0.png' ) {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn0.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
-			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties["icon"] == 'icon_warn4.png' || feature.properties["icon"] == 'icon_warn5.png') {
+			}else if(feature.properties[ "icon" ] == 'icon_warn3.png' || feature.properties["icon"] == 'icon_warn4.png' || feature.properties["icon"] == 'icon_warn5.png' || feature.properties["icon"] == 'icon_warn6.png')   {
 				return L.marker( latlng ,{ icon : L.icon({iconUrl:'https://www.cerd.osaka-cu.ac.jp/cerdar_pics/icons/icon_warn3.png',iconSize:[30,30],iconAnchor:[10,10]}) });
 
 			}else if(feature.properties[ "icon" ] == 'icon_warn2.png' ) {
